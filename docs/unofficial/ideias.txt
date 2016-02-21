@@ -1,0 +1,26 @@
+- Mock up:
+ - Pencil
+
+- Back-end:
+ - Banco de dados: MySql
+ - Linguagem de Programação: Java
+ - Servidor de Aplicação: Tomcat 7.
+ - Gerenciamento de dependencia: Maven
+ - MVC: Spring MVC
+ - Banco de dados: Hibernate
+ - Login: Spring Security
+ - Controle de Versão: Git
+
+- Front-end:
+ - Design Bootstrap (fonts, css, componentes)
+ - Nodejs
+ - Ionic (HTML, CSS, ANGULAR.JS)
+ - Bower (gerenciar dependencias front-end)
+
+Funcionalidades:
+ - Login pelo facebook / Cadastro manual
+ - Diário de viagem / Upload de fotos
+ - Carousel de dias por viagem
+ - Ranking de Cidades / Ranking de Atrações
+ - Busca por cidade, ranking, etc.
+ - Opções (trocar senha, desassociar do facebook, etc)
