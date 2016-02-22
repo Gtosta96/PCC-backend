@@ -9,12 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/** Model class Users who will login on application
+ *  @version 1.0.0
+ *  @since version 1.0.0
+ *  @author Gabriel
+ */
+
 @Entity
 @Table (name="USERS")
 public class Users implements Serializable{
 
 	private static final long serialVersionUID = 22022016080210L;
 
+	//PARAMETERS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "ID")
@@ -35,6 +42,7 @@ public class Users implements Serializable{
 	@Column (name = "ENABLED")
 	private Boolean enabled;
 	
+	// CONSTRUCTORS
 	public Users(){}
 
 	public Users(int id, String username, String password, String email, String passwordHint, Boolean enabled) {
@@ -47,6 +55,7 @@ public class Users implements Serializable{
 		this.enabled = enabled;
 	}
 
+	//GETTERS AND SETTERS
 	public int getId() {
 		return id;
 	}
@@ -91,6 +100,7 @@ public class Users implements Serializable{
 		this.enabled = enabled;
 	}
 
+	//HASHCODE METHOD
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -104,6 +114,7 @@ public class Users implements Serializable{
 		return result;
 	}
 
+	//EQUALS METHOD
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -143,6 +154,7 @@ public class Users implements Serializable{
 		return true;
 	}
 
+	//TOSTRING METHOD
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email

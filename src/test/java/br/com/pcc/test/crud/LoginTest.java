@@ -1,4 +1,4 @@
-package br.com.pcc.mock;
+package br.com.pcc.test.crud;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 import br.com.pcc.model.Users;
 
-public class Test {
+public class LoginTest {
 
 	//TODO: REMOVE AND CREATE A TEST CLASS!
 	public static void main(String[] args) {
