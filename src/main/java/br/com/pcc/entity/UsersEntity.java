@@ -1,4 +1,4 @@
-package br.com.pcc.model;
+package br.com.pcc.entity;
 
 import java.io.Serializable;
 
@@ -9,23 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-/** Model class Users who will login on application
+/** Users será responsável por mapear a tabela USERS no banco de dados e construir objetos com informações do Usuário.
  *  @version 1.0.0
  *  @since version 1.0.0
- *  @author Gabriel
+ *  @author Gabriel Tosta
  */
 
 @Entity
 @Table (name="USERS")
-public class Users implements Serializable{
+public class UsersEntity implements Serializable {
 
 	private static final long serialVersionUID = 22022016080210L;
 
-	//PARAMETERS
+	//PARAMETROS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "ID")
-	private int id;
+	private Long id;
 	
 	@Column (name = "USERNAME")
 	private String username;
@@ -42,12 +42,11 @@ public class Users implements Serializable{
 	@Column (name = "ENABLED")
 	private Boolean enabled;
 	
-	// CONSTRUCTORS
-	public Users(){}
+	// CONSTRUTORES
+	public UsersEntity(){}
 
-	public Users(int id, String username, String password, String email, String passwordHint, Boolean enabled) {
+	public UsersEntity(String username, String password, String email, String passwordHint, Boolean enabled) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
@@ -56,7 +55,7 @@ public class Users implements Serializable{
 	}
 
 	//GETTERS AND SETTERS
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -100,21 +99,21 @@ public class Users implements Serializable{
 		this.enabled = enabled;
 	}
 
-	//HASHCODE METHOD
+	//HASHCODE	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((passwordHint == null) ? 0 : passwordHint.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
-	//EQUALS METHOD
+	//EQUALS
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,7 +122,7 @@ public class Users implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		UsersEntity other = (UsersEntity) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -134,7 +133,10 @@ public class Users implements Serializable{
 				return false;
 		} else if (!enabled.equals(other.enabled))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (password == null) {
 			if (other.password != null)
@@ -153,8 +155,8 @@ public class Users implements Serializable{
 			return false;
 		return true;
 	}
-
-	//TOSTRING METHOD
+	
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email

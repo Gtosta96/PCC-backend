@@ -1,5 +1,8 @@
 package br.com.pcc.dao;
 
-public class UsersDao {
+import br.com.pcc.dao.util.GenericDao;
+import br.com.pcc.entity.UsersEntity;
+
+public class UsersDao extends GenericDao<UsersEntity, Long>{
 
 }
