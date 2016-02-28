@@ -1,0 +1,30 @@
+Introdução
+
+Endereço Git para salvar os documentos - https://github.com/Gtosta96/PCC-backend/tree/master/src/main/resources/br/com/pcc/docs/official
+
+- Para que serve, o porque resolvemos fazer esse aplicativo, qual foi o incentivo,
+
+
+1-Problema
+
+Ex.: como planejar uma viagem, guardar lembranças, etc...
+Qual ou quais os problemas queremos resolver com o aplicativo, 
+
+3-Objetivo
+Um aplicativo onde seja possivel...
+
+
+2-Justificativa
+Justificativa em relação ao problema
+
+Na justificativa colocar também uma pesquisa de mercado, se já existe uma solução parecida, se existir, qual a diferença do que estamos fazendo, quem é o público alvo
+se ele trocaria o sistema que utiliza hoje pelo sistema que estamos propondo.
+
+4-Metodologia
+
+Metodo que será utilizado para produzir o sistema, tecnologia, etc...
+
+
+
+Entregar  em 01/03/16. dentro das normas ABNT, não precisa ser impresso
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
