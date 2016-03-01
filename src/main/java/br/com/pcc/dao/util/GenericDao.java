@@ -29,19 +29,23 @@ public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
 		this.entityManager.getTransaction().begin();
 	};
 
+	@Override
 	public void commit() {
 		this.entityManager.getTransaction().commit();
 	};
 
+	@Override
 	public void close() {
 		this.entityManager.close();
 		this.factory.close();
 	};
 
+	@Override
 	public void rollBack() {
 		this.entityManager.getTransaction().rollback();
 	};
 
+	@Override
 	public void save(T entity) throws Exception{
 		try {
 			this.beginTransaction();
@@ -53,6 +57,7 @@ public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
 		}
 	};
 
+	@Override
 	public void update(T entity) throws Exception {
 		try {
 			this.beginTransaction();
@@ -64,6 +69,7 @@ public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
 		}
 	};
 	
+	@Override
 	public void delete(T entity) throws Exception {
 		try {
 			this.beginTransaction();
@@ -75,6 +81,7 @@ public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
 		}
 	};
 
+	@Override
 	public T findById(PK id) throws Exception {
 		try {
 			return (T) this.entityManager.find(this.persistentClass, id);
@@ -85,6 +92,7 @@ public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<T> listAll() throws Exception {
 		try {
 			return this.entityManager.createQuery(("FROM " + this.persistentClass.getName())).getResultList();			

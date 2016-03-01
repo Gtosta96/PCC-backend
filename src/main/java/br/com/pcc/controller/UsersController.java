@@ -11,20 +11,16 @@ import br.com.pcc.entity.UsersEntity;
 @Controller
 public class UsersController {
 
-	@RequestMapping(value = "/loginAuth", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
 	@ResponseBody
-	public UsersEntity authLogin(@RequestParam(name = "username", required = false) String username,
-								 @RequestParam(name = "password", required = false) String password) {
+	public UsersEntity authLogin(@RequestParam("username") String username,
+							@RequestParam("password") String password) {
 		
 		UsersEntity user = new UsersEntity();
-		
-		System.out.println(username);
-		System.out.println(password);
-		
 		user.setUsername("USUARIO1");
 		user.setPassword("USUARIO1");
 		user.setEmail("USUARIO1");
-
+		
 		return user;
 	}
 }

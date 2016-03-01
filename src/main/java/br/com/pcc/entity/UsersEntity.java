@@ -24,19 +24,19 @@ public class UsersEntity implements Serializable {
 	//PARAMETROS
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "ID")
+	@Column (name = "ID", nullable = false)
 	private Long id;
 	
-	@Column (name = "USERNAME")
+	@Column (name = "USERNAME", nullable = false)
 	private String username;
 	
-	@Column (name = "PASSWORD")
+	@Column (name = "PASSWORD", nullable = false)
 	private String password;
 	
-	@Column (name = "EMAIL")
+	@Column (name = "EMAIL", nullable = false)
 	private String email;
 	
-	@Column (name = "PASSWORD_HINT")
+	@Column (name = "PASSWORD_HINT", nullable = false)
 	private String passwordHint;
 	
 	@Column (name = "ENABLED")
