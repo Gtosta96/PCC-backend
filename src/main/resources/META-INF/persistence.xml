@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
      http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
-	
+
 	<!-- Persistence Unit -->
 	<persistence-unit name="PCC" transaction-type="RESOURCE_LOCAL">
 
@@ -21,13 +23,13 @@
 			<property name="javax.persistence.jdbc.password" value="postgres" />
 
 			<!-- Hibernate Properties -->
-			<property name="dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
-			<property name="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory"/>
+			<property name="dialect" value="org.hibernate.dialect.PostgreSQL9Dialect" />
+			<property name="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
 
 			<!-- Update Database and Generate Tables -->
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
 </persistence>
