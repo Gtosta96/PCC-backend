@@ -15,63 +15,68 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-/** Users será responsável por mapear a tabela USERS no banco de dados e construir objetos com informações do Usuário.
- *  @version 1.0.0
- *  @since version 1.0.0
- *  @author Gabriel Tosta
+/**
+ * LoginCredentials será responsável por mapear a tabela LOGIN_CREDENTIALS no banco de
+ * dados e construir objetos com informações de login do Usuário.
+ * 
+ * @version 1.0.0
+ * @since version 1.0.0
+ * @author Gabriel Tosta
  */
 
 @Entity
-@Table (name="LOGIN_CREDENTIALS")
+@Table(name = "LOGIN_CREDENTIALS")
 public class LoginCredentialsEntity implements Serializable {
 
 	private static final long serialVersionUID = 22022016080210L;
 
-	//PARAMETROS
+	// PARAMETROS
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column (name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
-	
-	@NotEmpty
-	@OneToOne (fetch = FetchType.LAZY)
-	@JoinColumn(name = "USER_CREDENTIALS", referencedColumnName = "ID")
-	@Column (name = "CREDENTIALS_ID")
-	private UserCredentialsEntity credentials;
-	
-	@NotEmpty
-	@Column (name = "USERNAME")
-	private String username;
-	
-	@NotEmpty
-	@Column (name = "PASSWORD")
-	private String password;
-	
-	@NotEmpty
-	@Column (name = "EMAIL")
-	private String email;
-	
-	@NotEmpty
-	@Column (name = "PASSWORD_HINT")
-	private String passwordHint;
-	
-	@NotNull
-	@Column (name = "ENABLED")
-	private Boolean enabled;
-	
-	// CONSTRUTORES
-	public LoginCredentialsEntity(){}
 
-	public LoginCredentialsEntity(String username, String password, String email, String passwordHint, Boolean enabled) {
-		super();
+	@NotEmpty
+	@Column(name = "USERNAME")
+	private String username;
+
+	@NotEmpty
+	@Column(name = "PASSWORD")
+	private String password;
+
+	@NotEmpty
+	@Column(name = "PASSWORD_HINT")
+	private String passwordHint;
+
+	@NotEmpty
+	@Column(name = "EMAIL")
+	private String email;
+
+	@NotEmpty
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_CREDENTIALS", referencedColumnName = "ID")
+	@Column(name = "CREDENTIALS_ID")
+	private UserCredentialsEntity credentials;
+
+	@NotNull
+	@Column(name = "ENABLED")
+	private Boolean enabled;
+
+	// CONSTRUTORES
+	public LoginCredentialsEntity() {
+	}
+
+	public LoginCredentialsEntity(String username, String password, String passwordHint, String email,
+			UserCredentialsEntity credentials, Boolean enabled) {
 		this.username = username;
 		this.password = password;
-		this.email = email;
 		this.passwordHint = passwordHint;
+		this.email = email;
+		this.credentials = credentials;
 		this.enabled = enabled;
 	}
 
-	//GETTERS AND SETTERS
+	// GETTERS AND SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -92,6 +97,14 @@ public class LoginCredentialsEntity implements Serializable {
 		this.password = password;
 	}
 
+	public String getPasswordHint() {
+		return passwordHint;
+	}
+
+	public void setPasswordHint(String passwordHint) {
+		this.passwordHint = passwordHint;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -100,12 +113,12 @@ public class LoginCredentialsEntity implements Serializable {
 		this.email = email;
 	}
 
-	public String getPasswordHint() {
-		return passwordHint;
+	public UserCredentialsEntity getCredentials() {
+		return credentials;
 	}
 
-	public void setPasswordHint(String passwordHint) {
-		this.passwordHint = passwordHint;
+	public void setCredentials(UserCredentialsEntity credentials) {
+		this.credentials = credentials;
 	}
 
 	public Boolean getEnabled() {
@@ -116,11 +129,12 @@ public class LoginCredentialsEntity implements Serializable {
 		this.enabled = enabled;
 	}
 
-	//HASHCODE	
+	// HASHCODE
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((credentials == null) ? 0 : credentials.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((enabled == null) ? 0 : enabled.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -130,7 +144,7 @@ public class LoginCredentialsEntity implements Serializable {
 		return result;
 	}
 
-	//EQUALS
+	// EQUALS
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -140,6 +154,11 @@ public class LoginCredentialsEntity implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		LoginCredentialsEntity other = (LoginCredentialsEntity) obj;
+		if (credentials == null) {
+			if (other.credentials != null)
+				return false;
+		} else if (!credentials.equals(other.credentials))
+			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -172,11 +191,12 @@ public class LoginCredentialsEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
-	//TOSTRING
+
+	// TOSTRING
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", passwordHint=" + passwordHint + ", enabled=" + enabled + "]";
+		return "LoginCredentialsEntity [id=" + id + ", username=" + username + ", password=" + password
+				+ ", passwordHint=" + passwordHint + ", email=" + email + ", credentials=" + credentials + ", enabled="
+				+ enabled + "]";
 	}
 }
