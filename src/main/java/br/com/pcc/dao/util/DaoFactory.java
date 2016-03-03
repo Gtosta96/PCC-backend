@@ -3,7 +3,7 @@ package br.com.pcc.dao.util;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.pcc.dao.UsersDao;
+import br.com.pcc.dao.UserDao;
 
 /** Dao Factory será responsável por inicializar o Entity Manager Factory
  *  @version 1.0.0
@@ -30,11 +30,11 @@ public class DaoFactory {
 	}
 	
 	//método responsável por criar nova instancia de Users
-	private static UsersDao usersDaoInstance;
+	private static UserDao usersDaoInstance;
 	
-	public static UsersDao UsersInstance() {
+	public static UserDao UsersInstance() {
 		if(usersDaoInstance == null)
-			usersDaoInstance = new UsersDao();
+			usersDaoInstance = new UserDao();
 		
 		return usersDaoInstance;
 	}

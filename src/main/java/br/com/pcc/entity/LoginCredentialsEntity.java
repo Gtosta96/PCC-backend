@@ -4,10 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /** Users será responsável por mapear a tabela USERS no banco de dados e construir objetos com informações do Usuário.
  *  @version 1.0.0
@@ -16,36 +22,47 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table (name="USERS")
-public class UsersEntity implements Serializable {
+@Table (name="LOGIN_CREDENTIALS")
+public class LoginCredentialsEntity implements Serializable {
 
 	private static final long serialVersionUID = 22022016080210L;
 
 	//PARAMETROS
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column (name = "ID", nullable = false)
+	@GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Column (name = "ID")
 	private Long id;
 	
-	@Column (name = "USERNAME", nullable = false)
+	@NotEmpty
+	@OneToOne (fetch = FetchType.LAZY)
+	@JoinColumn(name = "USER_CREDENTIALS", referencedColumnName = "ID")
+	@Column (name = "CREDENTIALS_ID")
+	private UserCredentialsEntity credentials;
+	
+	@NotEmpty
+	@Column (name = "USERNAME")
 	private String username;
 	
-	@Column (name = "PASSWORD", nullable = false)
+	@NotEmpty
+	@Column (name = "PASSWORD")
 	private String password;
 	
-	@Column (name = "EMAIL", nullable = false)
+	@NotEmpty
+	@Column (name = "EMAIL")
 	private String email;
 	
-	@Column (name = "PASSWORD_HINT", nullable = false)
+	@NotEmpty
+	@Column (name = "PASSWORD_HINT")
 	private String passwordHint;
 	
+	@NotNull
 	@Column (name = "ENABLED")
 	private Boolean enabled;
 	
 	// CONSTRUTORES
-	public UsersEntity(){}
+	public LoginCredentialsEntity(){}
 
-	public UsersEntity(String username, String password, String email, String passwordHint, Boolean enabled) {
+	public LoginCredentialsEntity(String username, String password, String email, String passwordHint, Boolean enabled) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -122,7 +139,7 @@ public class UsersEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UsersEntity other = (UsersEntity) obj;
+		LoginCredentialsEntity other = (LoginCredentialsEntity) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
