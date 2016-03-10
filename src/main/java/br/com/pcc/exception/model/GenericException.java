@@ -8,21 +8,26 @@ public class GenericException extends RuntimeException {
 	private String errorMsg;
 	
 	public GenericException() {}
-
-	public GenericException(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
 	
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-	public void setErrorMsg(String errorMsg) {
+	public GenericException(String errorTitle, String errorMsg) {
+		super();
+		this.errorTitle = errorTitle;
 		this.errorMsg = errorMsg;
-	}	
+	}
+
 	public String getErrorTitle() {
 		return errorTitle;
 	}
+
 	public void setErrorTitle(String errorTitle) {
 		this.errorTitle = errorTitle;
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }
