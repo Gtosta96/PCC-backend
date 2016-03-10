@@ -28,7 +28,7 @@ public class UserController {
 			LOGGER.info("Usu√°rio logado com sucesso: " + user.getUsernameOrEmail());
 		} else {
 			LOGGER.error("Usu√°rio n√£o autorizado: " + user.getUsernameOrEmail());
-			throw new GenericException("Given name is too short");
+			throw new GenericException("Erro", "Usu·rio n„o encontrado");
 		}
 
 		return user;
