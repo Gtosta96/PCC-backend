@@ -13,11 +13,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * LoginCredentials ser· respons·vel por mapear a tabela LOGIN_CREDENTIALS no banco de
- * dados e construir objetos com informaÁıes de login do Usu·rio.
+ * LoginCredentialsEntity ser√° respons√°vel por mapear a tabela LOGIN_CREDENTIALS no banco de
+ * dados e construir objetos com informa√ß√µes de login do Usu√°rio.
  * 
  * @version 1.0.0
  * @since version 1.0.0
@@ -49,6 +50,7 @@ public class LoginCredentialsEntity implements Serializable {
 	private String passwordHint;
 
 	@NotEmpty
+	@Email
 	@Column(name = "EMAIL")
 	private String email;
 

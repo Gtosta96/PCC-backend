@@ -1,6 +1,7 @@
 package br.com.pcc.controller;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.pcc.entity.LoginCredentialsEntity;
+import br.com.pcc.dto.LoginCredentialsDto;
+import br.com.pcc.exception.model.GenericException;
 
 @Controller
 public class UserController {
@@ -18,20 +20,15 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
 	@ResponseBody
-	public LoginCredentialsEntity authLogin(@RequestBody LoginCredentialsEntity user, HttpServletResponse response) {
+	public LoginCredentialsDto authLogin(@RequestBody @Valid LoginCredentialsDto user, HttpServletResponse response) {
 
-		LOGGER.info("Tentativa de login, username: " + user.getUsername());
-		
-		if (user.getUsername().equals("123456") && user.getPassword().equals("123456")) {
-
-			user.setUsername("USUARIO1");
-			user.setPassword("USUARIO1");
-			user.setEmail("USUARIO1");
-		
-			LOGGER.info("Usu·rio logado com sucesso: " + user.getUsername());
+		LOGGER.info("Tentativa de login, username: " + user.getUsernameOrEmail());
+				
+		if (user.getUsernameOrEmail().equals("123456") && user.getPassword().equals("123456")) {
+			LOGGER.info("Usu√°rio logado com sucesso: " + user.getUsernameOrEmail());
 		} else {
-			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-			LOGGER.error("Usu·rio n„o autorizado: " + user.getUsername());
+			LOGGER.error("Usu√°rio n√£o autorizado: " + user.getUsernameOrEmail());
+			throw new GenericException("Given name is too short");
 		}
 
 		return user;

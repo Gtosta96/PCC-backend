@@ -12,8 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * UsersCredentials ser· respons·vel por mapear a tabela USER_CREDENTIALS no
- * banco de dados e construir objetos com informaÁıes pessoais do Usu·rio.
+ * UsersCredentialsEntity ser√° respons√°vel por mapear a tabela USER_CREDENTIALS no
+ * banco de dados e construir objetos com informa√ß√µes pessoais do Usu√°rio.
  * 
  * @version 1.0.0
  * @since version 1.0.0
