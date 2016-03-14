@@ -1,33 +1,34 @@
 package br.com.pcc.exception.model;
 
+import br.com.pcc.enums.ExceptionEnums;
+
 public class GenericException extends RuntimeException {
 
 	private static final long serialVersionUID = 8032016135725L;
 	
-	private String errorTitle;
-	private String errorMsg;
-	
+	private String title;
+	private String message;
+
 	public GenericException() {}
 	
-	public GenericException(String errorTitle, String errorMsg) {
-		super();
-		this.errorTitle = errorTitle;
-		this.errorMsg = errorMsg;
+	public GenericException(ExceptionEnums exceptionEnums) {
+		this.title = exceptionEnums.getTitle();
+		this.message = exceptionEnums.getMessage();
 	}
 
-	public String getErrorTitle() {
-		return errorTitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setErrorTitle(String errorTitle) {
-		this.errorTitle = errorTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getErrorMsg() {
-		return errorMsg;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }
