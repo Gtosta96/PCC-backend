@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * LoginCredentialsDto será responsável por transferir dados enviados pelo usuário para manipulações.
+ * LoginCredentialsDto será responsável por transferir dados no momento de login para manipulações.
  * 
  * @version 1.0.0
  * @since version 1.0.0
