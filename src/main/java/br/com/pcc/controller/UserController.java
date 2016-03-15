@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.pcc.dto.LoginCredentialsDto;
+import br.com.pcc.enums.ExceptionEnums;
 import br.com.pcc.exception.model.GenericException;
 
 @Controller
@@ -28,7 +29,7 @@ public class UserController {
 			LOGGER.info("Usu√°rio logado com sucesso: " + user.getUsernameOrEmail());
 		} else {
 			LOGGER.error("Usu√°rio n√£o autorizado: " + user.getUsernameOrEmail());
-			throw new GenericException("Erro", "Usu·rio n„o encontrado");
+			throw new GenericException(ExceptionEnums.INVALID_USER);
 		}
 
 		return user;
