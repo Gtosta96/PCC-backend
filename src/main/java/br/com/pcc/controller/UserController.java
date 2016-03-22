@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.pcc.dto.LoginCredentialsDto;
-import br.com.pcc.enums.ExceptionEnums;
 import br.com.pcc.exception.model.GenericException;
+import br.com.pcc.util.enums.ExceptionEnums;
 
 @Controller
 public class UserController {

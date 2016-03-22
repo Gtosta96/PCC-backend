@@ -1,8 +1,8 @@
-package br.com.pcc.enums;
+package br.com.pcc.util.enums;
 
 public enum ExceptionEnums {
 	
-	INVALID_USER ("Usu·rio n„o encontrado", "O usu·rio n„o foi encontrado no banco de dados");
+	INVALID_USER ("Usu√°rio n√£o encontrado", "O usu√°rio n√£o foi encontrado no banco de dados");
 	
 	private String title;
 	private String message;

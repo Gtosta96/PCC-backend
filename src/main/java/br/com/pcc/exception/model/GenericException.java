@@ -1,6 +1,6 @@
 package br.com.pcc.exception.model;
 
-import br.com.pcc.enums.ExceptionEnums;
+import br.com.pcc.util.enums.ExceptionEnums;
 
 public class GenericException extends RuntimeException {
 
