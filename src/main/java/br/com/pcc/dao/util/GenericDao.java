@@ -6,7 +6,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 
 	private final EntityManager entityManager;
 	private final EntityManagerFactory factory;
@@ -88,7 +91,6 @@ public abstract class GenericDao<T, PK> implements IGenericDao<T, PK> {
 		} catch (Exception e){
 			throw e;
 		}
-		
 	}
 
 	@SuppressWarnings("unchecked")

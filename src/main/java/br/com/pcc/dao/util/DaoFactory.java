@@ -3,39 +3,31 @@ package br.com.pcc.dao.util;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.pcc.dao.LoginCredentialsDao;
+import org.springframework.stereotype.Repository;
 
-/** Dao Factory será responsável por inicializar o Entity Manager Factory
+/** Dao Factory serï¿½ responsï¿½vel por inicializar o Entity Manager Factory
  *  @version 1.0.0
  *  @since version 1.0.0
  *  @author Gabriel Tosta
  */
+
+@Repository
 public class DaoFactory {
 
 	//CONTRUTOR
 	private DaoFactory(){}
 	
-	//variavel estática com o nome da unidade de persistencia (persistence.xml).
+	//variavel estï¿½tica com o nome da unidade de persistencia (persistence.xml).
 	private static final String PERSISTENCE_UNIT_NAME = "PCC";
 	
-	//responsável por gerenciar conexão com banco de dados
+	//responsï¿½vel por gerenciar conexï¿½o com banco de dados
 	private static EntityManagerFactory entityManageFactoryInstance;
 	
-	//método responsável por abrir conexão com banco de dados
+	//mï¿½todo responsï¿½vel por abrir conexï¿½o com banco de dados
 	public static EntityManagerFactory entityManagerFactoryInstance() {
 		if (entityManageFactoryInstance == null)
 			entityManageFactoryInstance = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		
 		return entityManageFactoryInstance;
-	}
-	
-	//método responsável por criar e garantir uma única instancia para LoginCredentials
-	private static LoginCredentialsDao loginCredentialsDaoInstance;
-	
-	public static LoginCredentialsDao loginCredentialsInstance() {
-		if(loginCredentialsDaoInstance == null)
-			loginCredentialsDaoInstance = new LoginCredentialsDao();
-		
-		return loginCredentialsDaoInstance;
 	}
 }

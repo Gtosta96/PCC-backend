@@ -1,4 +1,4 @@
-package br.com.pcc.exception.model;
+package br.com.pcc.util.exception.entity;
 
 import br.com.pcc.util.enums.ExceptionEnums;
 
