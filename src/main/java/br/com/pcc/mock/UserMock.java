@@ -1,6 +1,7 @@
 package br.com.pcc.mock;
 
 import br.com.pcc.entity.LoginCredentialsEntity;
+import br.com.pcc.entity.UserCredentialsEntity;
 
 /**
  * Classe Utilizada para retornar dados quando não há banco de dados disponivel.
@@ -10,6 +11,12 @@ import br.com.pcc.entity.LoginCredentialsEntity;
 public class UserMock {
 
 	public LoginCredentialsEntity getMockLoginCredentialsEntity(){
-		return new LoginCredentialsEntity("USER-MOCK", "PASSWORD-MOCK", "PASSWORD-HINT-MOCK", "EMAIL@MOCK.COM", null, true);
+		UserCredentialsEntity userData = new UserCredentialsEntity("Gabriel", "Tosta", "FIX it", "Masculino");
+		LoginCredentialsEntity loginUserData = new LoginCredentialsEntity("Gtosta96", "Gtosta96", "Mesma coisa que o usuário", "gabrieltosta3@gmail.com", true);
+		
+		userData.setLoginCredentials(loginUserData);
+		loginUserData.setUserCredentials(userData);
+		
+		return loginUserData;
 	}
 }
