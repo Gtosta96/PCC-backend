@@ -6,9 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
+//@Repository
 public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 
 	private final EntityManager entityManager;
@@ -92,6 +90,15 @@ public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 			throw e;
 		}
 	}
+	
+	@Override
+	public T findByUsernameOrEmail(T entity) throws Exception {
+		try {
+			return (T) this.entityManager.find(this.persistentClass, entity);
+		} catch (Exception e){
+			throw e;
+		}
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -101,5 +108,5 @@ public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 		} catch (Exception e){
 			throw e;
 		}
-	};
+	}
 }

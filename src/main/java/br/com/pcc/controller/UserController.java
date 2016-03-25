@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +18,9 @@ import br.com.pcc.util.exception.entity.GenericException;
 @Controller
 public class UserController {
 
-	@Autowired
-	UserService userService;
+//	@Autowired
+	UserService userService = new UserService();
+	
 	private static Logger LOGGER = Logger.getLogger(UserController.class);
 	
 	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
