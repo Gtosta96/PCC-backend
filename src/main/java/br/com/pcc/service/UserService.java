@@ -21,12 +21,12 @@ public class UserService {
 	private static Logger LOGGER = Logger.getLogger(UserService.class);
 	 
 	public LoginCredentialsEntity getLoginCredentials(LoginCredentialsDto userDto) {
-		
-		dao = new GenericDao<LoginCredentialsEntity, Long>();
+
 		userEntity = parser.loginCredentialsDtoToLoginCredentialsEntity(userDto);
 		
 		LOGGER.info("Tentativa de busca de Usuário.");
 		try {
+			dao = new GenericDao<LoginCredentialsEntity, Long>();
 			userEntity = dao.findByUsernameOrEmail(userEntity);
 			
 			LOGGER.info("Usuário recuperado com sucesso: " + userDto.getUsernameOrEmail());
