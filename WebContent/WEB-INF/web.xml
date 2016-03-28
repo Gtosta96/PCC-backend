@@ -6,6 +6,8 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>PCC-backend</display-name>
 
+<!-- Servlets -->
+<!-- Spring MVC Configuration -->
 	<servlet>
       <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
       <servlet-class>
@@ -14,7 +16,7 @@
       <init-param>
           <param-name>contextConfigLocation</param-name>
           <param-value>
-              /WEB-INF/spring-context.xml
+          	/WEB-INF/spring-context.xml
           </param-value>
       </init-param>
       <load-on-startup>1</load-on-startup>
@@ -25,6 +27,7 @@
       <url-pattern>/</url-pattern>
 </servlet-mapping>
 
+<!-- Filters -->
 <!-- Filter Cross-origin Resource Sharing (CORS) -->
 	<filter>
 		<filter-name>CorsFilter</filter-name>
