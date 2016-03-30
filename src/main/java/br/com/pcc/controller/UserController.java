@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.pcc.dto.LoginCredentialsDto;
-import br.com.pcc.entity.LoginCredentialsEntity;
+import br.com.pcc.dto.UserDetailsDto;
+import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.service.UserService;
 import br.com.pcc.util.enums.ExceptionEnums;
-import br.com.pcc.util.exception.entity.GenericException;
+import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
 @Controller
 public class UserController {
 
 //	@Autowired
 	UserService userService = new UserService();
-	LoginCredentialsEntity loginCredentials;
+	UserDetailsEntity loginCredentials;
 	
 	private static Logger LOGGER = Logger.getLogger(UserController.class);
 	
 	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
 	@ResponseBody
-	public LoginCredentialsDto authLogin(@RequestBody @Valid LoginCredentialsDto user, HttpServletResponse response) {
+	public UserDetailsDto authLogin(@RequestBody @Valid UserDetailsDto user, HttpServletResponse response) {
  
 		LOGGER.info("Tentativa de login, username: " + user.getUsernameOrEmail());
 		loginCredentials = userService.getLoginCredentials(user);
@@ -36,7 +36,7 @@ public class UserController {
 			LOGGER.info("Usuário logado com sucesso: " + user.getUsernameOrEmail());
 		} else {
 			LOGGER.error("Usuário não autorizado: " + user.getUsernameOrEmail());
-			throw new GenericException(ExceptionEnums.INVALID_USER);
+			throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
 		}
 
 		return user;

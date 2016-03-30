@@ -2,14 +2,14 @@ package br.com.pcc.converter;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
-import br.com.pcc.dto.LoginCredentialsDto;
-import br.com.pcc.entity.LoginCredentialsEntity;
+import br.com.pcc.dto.UserDetailsDto;
+import br.com.pcc.entity.UserDetailsEntity;
 
 public class EntityConverter {
 
-	public LoginCredentialsEntity loginCredentialsDtoToLoginCredentialsEntity(LoginCredentialsDto dto) {
+	public UserDetailsEntity userDetailsDtoToUserDetailsEntity(UserDetailsDto dto) {
 		
-		LoginCredentialsEntity entity = new LoginCredentialsEntity();
+		UserDetailsEntity entity = new UserDetailsEntity();
 		boolean isEmail = EmailValidator.getInstance().isValid(dto.getUsernameOrEmail());
 		
 		if (isEmail) {
@@ -17,6 +17,7 @@ public class EntityConverter {
 		}else {
 			entity.setUsername(dto.getUsernameOrEmail());
 		}
+		entity.setUsernameOrEmail(dto.getUsernameOrEmail());
 		entity.setPassword(dto.getPassword());
 		
 		return entity;

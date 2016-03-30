@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.pcc.util.exception.entity.GenericException;
+import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
 @ControllerAdvice
 public class ExceptionHandlingController {
-	@ExceptionHandler(GenericException.class)
+	@ExceptionHandler(GenericExceptionEntity.class)
 	@ResponseBody
-	public GenericException handleGenericException(GenericException e, HttpServletResponse response) {
+	public GenericExceptionEntity handleGenericException(GenericExceptionEntity e, HttpServletResponse response) {
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		return e;
 	 }

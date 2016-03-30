@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -27,14 +28,14 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @Entity
-@Table(name = "LOGIN_CREDENTIALS", catalog = "PCC")
-public class LoginCredentialsEntity implements Serializable {
+@Table(name = "USER_DETAILS", catalog = "PCC")
+public class UserDetailsEntity implements Serializable {
 
 	private static final long serialVersionUID = 22022016080210L;
 
 	// PARAMETROS
 	@Id
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "userCredentials"))
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
 	@GeneratedValue(generator = "generator")
 	@Column(name = "LOGIN_ID")
 	private Long loginId;
@@ -61,12 +62,15 @@ public class LoginCredentialsEntity implements Serializable {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
-	private UserCredentialsEntity userCredentials;
+	private UserEntity user;
+	
+	@Transient
+	private String usernameOrEmail;
 
 	// CONSTRUTORES
-	public LoginCredentialsEntity() {}
+	public UserDetailsEntity() {}
 
-	public LoginCredentialsEntity(String username, String password, String passwordHint, String email, Boolean enabled) {
+	public UserDetailsEntity(String username, String password, String passwordHint, String email, Boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.passwordHint = passwordHint;
@@ -118,11 +122,19 @@ public class LoginCredentialsEntity implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public UserCredentialsEntity getUserCredentials() {
-		return userCredentials;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setUserCredentials(UserCredentialsEntity userCredentials) {
-		this.userCredentials = userCredentials;
+	public void setUser(UserEntity userCredentials) {
+		this.user = userCredentials;
+	}
+
+	public String getUsernameOrEmail() {
+		return usernameOrEmail;
+	}
+
+	public void setUsernameOrEmail(String usernameOrEmail) {
+		this.usernameOrEmail = usernameOrEmail;
 	}
 }

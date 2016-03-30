@@ -6,34 +6,34 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.pcc.dao.UserCredentialsDao;
+import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.util.DaoFactory;
-import br.com.pcc.entity.LoginCredentialsEntity;
-import br.com.pcc.entity.UserCredentialsEntity;
+import br.com.pcc.entity.UserDetailsEntity;
+import br.com.pcc.entity.UserEntity;
 
 public class UsersTest {
 
 //	@Autowired
-	private UserCredentialsDao usersDao;
+	private UserDao usersDao;
 	private static Logger LOGGER;
 
 	@Before
 	public void setUp() {
-		usersDao = DaoFactory.userCredentialsInstance();
+		usersDao = DaoFactory.userDaoInstance();
 		LOGGER = Logger.getLogger(UsersTest.class);
 	}
 	
 	@Test
 	public void testSave() {
-		UserCredentialsEntity userData = new UserCredentialsEntity("Gabriel", "Tosta", "FIX it", "Masculino");
-		LoginCredentialsEntity loginUserData = new LoginCredentialsEntity("Gtosta96", "Gtosta96", "Mesma coisa que o usuário", "gabrieltosta3@gmail.com", true);
+		UserEntity user = new UserEntity("Gabriel", "Tosta", "FIX it", "Masculino");
+		UserDetailsEntity userDetails = new UserDetailsEntity("Gtosta96", "Gtosta96", "Mesma coisa que o usuário", "gabrieltosta3@gmail.com", true);
 		
-		userData.setLoginCredentials(loginUserData);
-		loginUserData.setUserCredentials(userData);
+		user.setUserDetails(userDetails);
+		userDetails.setUser(user);
 		
 		try {
-			usersDao.save(userData);
-			LOGGER.info("Usuário Inserido: " + userData);
+			usersDao.save(user);
+			LOGGER.info("Usuário Inserido: " + user);
 		} catch (Exception e) {
 			LOGGER.error("Usuário não inserido, ocorreu um erro!", e);
 		}
@@ -43,7 +43,7 @@ public class UsersTest {
 	public void testFindById() {		
 		try {
 			Long id = this.listAll().get(0).getUserId();
-			UserCredentialsEntity userData = this.usersDao.findById(id);
+			UserEntity userData = this.usersDao.findById(id);
 			LOGGER.info("Usuário Encontrado: " + userData);
 		} catch (Exception e) {
 			LOGGER.error("Usuário não encontrado, ocorreu um erro!", e);
@@ -53,7 +53,7 @@ public class UsersTest {
 	@Test
 	public void testUpdate() {	
 		try {
-			UserCredentialsEntity userData = this.listAll().get(0);
+			UserEntity userData = this.listAll().get(0);
 			
 			userData.setFirstName("Gabriel2");
 			userData.setLastName("Tosta2");
@@ -69,7 +69,7 @@ public class UsersTest {
 	@Test
 	public void testDelete() {
 		try {
-			UserCredentialsEntity userData = this.listAll().get(0);
+			UserEntity userData = this.listAll().get(0);
 			usersDao.delete(userData);
 			LOGGER.info("Usuário deletado: " + userData );	
 		} catch (Exception e) {
@@ -80,14 +80,18 @@ public class UsersTest {
 	@Test
 	public void testListAll() {
 		try {
-			List<UserCredentialsEntity> usersData = this.listAll();
-			LOGGER.info(usersData);
+			List<UserEntity> usersData = this.listAll();
+			LOGGER.info("Usuários recuperados com sucesso!");
+			for (UserEntity user : usersData) {
+				System.out.println(user);
+			}
+			
 		} catch (Exception e) {
 			LOGGER.error("Usuários não listados, ocorreu um erro!", e);
 		}
 	}
-	
-	public List<UserCredentialsEntity> listAll() throws Exception {
+
+	public List<UserEntity> listAll() throws Exception {
 		return this.usersDao.listAll();
 	}
 }

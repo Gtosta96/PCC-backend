@@ -20,7 +20,7 @@ public interface IGenericDao<T, PK> {
 	
 	public T findById(PK id) throws Exception;
 	
-	public T findByUsernameOrEmail(T entity) throws Exception;
+	public T findByUsernameOrEmail(String usernameOrEmail) throws Exception;
 	
 	List<T> listAll() throws Exception;
 }

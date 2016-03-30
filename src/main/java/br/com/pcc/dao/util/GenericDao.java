@@ -92,9 +92,9 @@ public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 	}
 	
 	@Override
-	public T findByUsernameOrEmail(T entity) throws Exception {
+	public T findByUsernameOrEmail(String usernameOrEmail) throws Exception {
 		try {
-			return (T) this.entityManager.find(this.persistentClass, entity);
+			return (T) this.entityManager.find(this.persistentClass, usernameOrEmail);
 		} catch (Exception e){
 			throw e;
 		}

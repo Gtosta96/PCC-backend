@@ -3,7 +3,8 @@ package br.com.pcc.dao.util;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.pcc.dao.UserCredentialsDao;
+import br.com.pcc.dao.UserDao;
+import br.com.pcc.dao.UserDetailsDao;
 
 /**
  * Dao Factory será responsável por inicializar o Entity Manager Factory
@@ -31,13 +32,21 @@ public class DaoFactory {
 		return entityManageFactoryInstance;
 	}
 
-	private static UserCredentialsDao userCredentialsDaoInstance;
-
-	public static UserCredentialsDao userCredentialsInstance() {
-		if (userCredentialsDaoInstance == null) {
-			userCredentialsDaoInstance = new UserCredentialsDao();
+	private static UserDao userDaoInstance;
+	public static UserDao userDaoInstance() {
+		if (userDaoInstance == null) {
+			userDaoInstance = new UserDao();
 		}
 
-		return userCredentialsDaoInstance;
+		return userDaoInstance;
+	}
+	
+	private static UserDetailsDao userDetailsDaoInstance;
+	public static UserDetailsDao userDetailsDaoInstance() {
+		if (userDetailsDaoInstance == null) {
+			userDetailsDaoInstance = new UserDetailsDao();
+		}
+
+		return userDetailsDaoInstance;
 	}
 }

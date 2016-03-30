@@ -24,8 +24,8 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 @Entity
-@Table(name = "USER_CREDENTIALS", catalog = "PCC")
-public class UserCredentialsEntity implements Serializable {
+@Table(name = "USERS", catalog = "PCC")
+public class UserEntity implements Serializable {
 
 	private static final long serialVersionUID = 02032016114140L;
 
@@ -51,13 +51,13 @@ public class UserCredentialsEntity implements Serializable {
 	@Column(name = "GENDER")
 	private String gender;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "userCredentials", cascade = CascadeType.ALL)
-	private LoginCredentialsEntity loginCredentials;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	private UserDetailsEntity userDetails;
 
 	// CONSTRUTORES
-	public UserCredentialsEntity() {}
+	public UserEntity() {}
 
-	public UserCredentialsEntity(String firstName, String lastName, String bornDate, String gender) {
+	public UserEntity(String firstName, String lastName, String bornDate, String gender) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.bornDate = bornDate;
@@ -100,11 +100,17 @@ public class UserCredentialsEntity implements Serializable {
 		this.gender = gender;
 	}
 
-	public LoginCredentialsEntity getLoginCredentials() {
-		return loginCredentials;
+	public UserDetailsEntity getUserDetails() {
+		return userDetails;
 	}
 
-	public void setLoginCredentials(LoginCredentialsEntity loginCredentials) {
-		this.loginCredentials = loginCredentials;
+	public void setUserDetails(UserDetailsEntity loginCredentials) {
+		this.userDetails = loginCredentials;
+	}
+
+	@Override
+	public String toString() {
+		return "UserEntity [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", bornDate="
+				+ bornDate + ", gender=" + gender + ", userDetails=" + userDetails + "]";
 	}	
 }

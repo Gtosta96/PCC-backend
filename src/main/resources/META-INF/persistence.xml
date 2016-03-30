@@ -13,8 +13,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<!-- Classes -->
-		<class>br.com.pcc.entity.LoginCredentialsEntity</class>
-		<class>br.com.pcc.entity.UserCredentialsEntity</class>
+		<class>br.com.pcc.entity.UserEntity</class>
+		<class>br.com.pcc.entity.UserDetailsEntity</class>
 
 		<properties>
 			<!-- Connection Properties -->
