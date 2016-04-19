@@ -32,7 +32,7 @@ public class UserController {
 		LOGGER.info("Tentativa de login, username: " + user.getUsernameOrEmail());
 		loginCredentials = userService.getLoginCredentials(user);
 		
-		if (user.getUsernameOrEmail().equals("123456") && user.getPassword().equals("123456")) {
+		if (loginCredentials != null) {
 			LOGGER.info("Usuário logado com sucesso: " + user.getUsernameOrEmail());
 		} else {
 			LOGGER.error("Usuário não autorizado: " + user.getUsernameOrEmail());
