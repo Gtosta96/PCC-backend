@@ -2,6 +2,8 @@ package br.com.pcc.dao.util;
 
 import java.util.List;
 
+import br.com.pcc.util.exception.entity.GenericExceptionEntity;
+
 public interface IGenericDao<T, PK> {
 
 	public void beginTransaction();
@@ -12,15 +14,15 @@ public interface IGenericDao<T, PK> {
 
 	public void rollBack();
 
-	public void save(T entity) throws Exception;
+	public void save(T entity) throws GenericExceptionEntity;
 	
-	public void update(T entity) throws Exception;
+	public void update(T entity) throws GenericExceptionEntity;
 	
-	public void delete(T entity) throws Exception;
+	public void delete(T entity) throws GenericExceptionEntity;
 	
-	public T findById(PK id) throws Exception;
+	public T findById(PK id) throws GenericExceptionEntity;
 	
-	public T findByUsernameOrEmail(String usernameOrEmail) throws Exception;
+	public T findByUsernameOrEmail(String usernameOrEmail) throws GenericExceptionEntity;
 	
-	List<T> listAll() throws Exception;
+	List<T> listAll() throws GenericExceptionEntity;
 }

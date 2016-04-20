@@ -6,6 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import br.com.pcc.util.enums.ExceptionEnums;
+import br.com.pcc.util.exception.entity.GenericExceptionEntity;
+
 //@Repository
 public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 
@@ -47,66 +50,54 @@ public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 	};
 
 	@Override
-	public void save(T entity) throws Exception{
+	public void save(T entity) throws GenericExceptionEntity {
 		try {
 			this.beginTransaction();
 			this.entityManager.persist(entity);
 			this.commit();
 		} catch (Exception e) {
 			this.rollBack();
-			throw e;
+			throw new GenericExceptionEntity(ExceptionEnums.DAO_SAVE_ERROR);
 		}
 	};
 
 	@Override
-	public void update(T entity) throws Exception {
+	public void update(T entity) throws GenericExceptionEntity {
 		try {
 			this.beginTransaction();
 			this.entityManager.merge(entity);
 			this.commit();
 		} catch (Exception e) {
 			this.rollBack();
-			throw e;
+			throw new GenericExceptionEntity(ExceptionEnums.DAO_UPDATE_ERROR);
 		}
 	};
 	
 	@Override
-	public void delete(T entity) throws Exception {
+	public void delete(T entity) throws GenericExceptionEntity {
 		try {
 			this.beginTransaction();
 			this.entityManager.remove(entity);
 			this.commit();
 		} catch (Exception e) {
 			this.rollBack();
-			throw e;
+			throw new GenericExceptionEntity(ExceptionEnums.DAO_DELETE_ERROR);
 		}
 	};
 
 	@Override
-	public T findById(PK id) throws Exception {
-		try {
-			return (T) this.entityManager.find(this.persistentClass, id);
-		} catch (Exception e){
-			throw e;
-		}
+	public T findById(PK id) throws GenericExceptionEntity {
+		return (T) this.entityManager.find(this.persistentClass, id);
 	}
 	
 	@Override
-	public T findByUsernameOrEmail(String usernameOrEmail) throws Exception {
-		try {
-			return (T) this.entityManager.find(this.persistentClass, usernameOrEmail);
-		} catch (Exception e){
-			throw e;
-		}
+	public T findByUsernameOrEmail(String usernameOrEmail) throws GenericExceptionEntity {
+		return (T) this.entityManager.find(this.persistentClass, usernameOrEmail);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> listAll() throws Exception {
-		try {
-			return this.entityManager.createQuery(("FROM " + this.persistentClass.getName())).getResultList();			
-		} catch (Exception e){
-			throw e;
-		}
+	public List<T> listAll() throws GenericExceptionEntity {
+		return this.entityManager.createQuery(("FROM " + this.persistentClass.getName())).getResultList();			
 	}
 }
