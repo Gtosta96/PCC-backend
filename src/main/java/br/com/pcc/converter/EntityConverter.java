@@ -2,8 +2,10 @@ package br.com.pcc.converter;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
+import br.com.pcc.dto.SignUpDto;
 import br.com.pcc.dto.UserDetailsDto;
 import br.com.pcc.entity.UserDetailsEntity;
+import br.com.pcc.entity.UserEntity;
 
 public class EntityConverter {
 
@@ -19,6 +21,28 @@ public class EntityConverter {
 		}
 		entity.setUsernameOrEmail(dto.getUsernameOrEmail());
 		entity.setPassword(dto.getPassword());
+		
+		return entity;
+	}
+	
+	public UserEntity signUpDtoToUserEntity(SignUpDto dto) {
+		
+		UserEntity entity = new UserEntity();
+		entity.setFirstName(dto.getFirstName());
+		entity.setLastName(dto.getLastName());
+		entity.setBornDate(dto.getBornDate());
+		entity.setGender(dto.getGender());
+		
+		return entity;
+	}
+	
+	public UserDetailsEntity signUpDtoToUserDetailsEntity(SignUpDto dto) {
+		
+		UserDetailsEntity entity = new UserDetailsEntity();
+		entity.setUsername(dto.getUsername());
+		entity.setPassword(dto.getPassword());
+		entity.setPasswordHint(dto.getPasswordHint());
+		entity.setEmail(dto.getEmail());
 		
 		return entity;
 	}

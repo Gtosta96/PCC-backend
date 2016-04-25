@@ -5,25 +5,25 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import br.com.pcc.converter.EntityConverter;
+import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.UserDetailsDao;
 import br.com.pcc.dao.util.DaoFactory;
+import br.com.pcc.dto.SignUpDto;
 import br.com.pcc.dto.UserDetailsDto;
 import br.com.pcc.entity.UserDetailsEntity;
+import br.com.pcc.entity.UserEntity;
 import br.com.pcc.mock.UserMock;
 import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
 //@Service
 public class UserService {
 
-//	@Autowired
-	private UserDetailsDao userDetailsDao;
-	private UserDetailsEntity userDetails = new UserDetailsEntity();
+	private EntityConverter converter;
 	private static Logger LOGGER = Logger.getLogger(UserService.class);
 	 
 	public UserDetailsEntity getLoginCredentials(UserDetailsDto userDetailsDto) throws GenericExceptionEntity {
-
-		userDetails = new EntityConverter().userDetailsDtoToUserDetailsEntity(userDetailsDto);
-		userDetailsDao = DaoFactory.userDetailsDaoInstance();
+		UserDetailsEntity userDetails = converter.userDetailsDtoToUserDetailsEntity(userDetailsDto);
+		UserDetailsDao userDetailsDao = DaoFactory.userDetailsDaoInstance();
 		
 		LOGGER.info("Tentativa de busca de Usuário.");
 			//userDetails = userDetailsDao.findByUsernameOrEmail(userDetails.getUsernameOrEmail());
@@ -44,5 +44,17 @@ public class UserService {
 			}
 
 		return userDetails;
+	}
+	
+	public void saveUser(SignUpDto signUpUser) {
+		UserDao userDao = DaoFactory.userDaoInstance();
+		
+		UserEntity user = converter.signUpDtoToUserEntity(signUpUser);
+		UserDetailsEntity userDetails = converter.signUpDtoToUserDetailsEntity(signUpUser);
+		
+		user.setUserDetails(userDetails);
+		userDetails.setUser(user);
+		
+		userDao.save(user);
 	}
 }
