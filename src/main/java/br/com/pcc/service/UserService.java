@@ -1,7 +1,5 @@
 package br.com.pcc.service;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
 import br.com.pcc.converter.EntityConverter;
@@ -12,45 +10,38 @@ import br.com.pcc.dto.SignUpDto;
 import br.com.pcc.dto.UserDetailsDto;
 import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.entity.UserEntity;
-import br.com.pcc.mock.UserMock;
+import br.com.pcc.util.enums.ExceptionEnums;
 import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
 //@Service
 public class UserService {
 
-	private EntityConverter converter;
 	private static Logger LOGGER = Logger.getLogger(UserService.class);
 	 
 	public UserDetailsEntity getLoginCredentials(UserDetailsDto userDetailsDto) throws GenericExceptionEntity {
-		UserDetailsEntity userDetails = converter.userDetailsDtoToUserDetailsEntity(userDetailsDto);
 		UserDetailsDao userDetailsDao = DaoFactory.userDetailsDaoInstance();
+		UserDetailsEntity userDetails = EntityConverter.userDetailsDtoToUserDetailsEntity(userDetailsDto);
 		
 		LOGGER.info("Tentativa de busca de Usuário.");
-			//userDetails = userDetailsDao.findByUsernameOrEmail(userDetails.getUsernameOrEmail());
-			
-			List<UserDetailsEntity> usersDetails = userDetailsDao.listAll();
-			for (UserDetailsEntity thisUserDetails : usersDetails) {
-				if (thisUserDetails.getUsernameOrEmail() == userDetails.getUsernameOrEmail() && thisUserDetails.getPassword() == userDetails.getPassword()){
-					userDetails = thisUserDetails;
-					LOGGER.info("Usuário recuperado com sucesso: " + userDetails.getUsernameOrEmail());
-					break;
-				}
-			}
-			
-			if (userDetails == null) {
-				LOGGER.info("Usuário não encontrado, pegando dados do mock");
-				userDetails = new UserMock().getMockLoginCredentialsEntity();
-				//throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
+		UserDetailsEntity userDetailsFinal = null;
+		userDetailsFinal = userDetailsDao.findByUsernameOrEmail(userDetails.getUsernameOrEmail(), userDetails.getPassword());
+		
+		if (userDetailsFinal != null) {
+			LOGGER.info("Usuário recuperado com sucesso: " + userDetailsFinal.getUsernameOrEmail());
+		} else {
+				LOGGER.info("Usuário não encontrado, pegando dados do mock/lançando exception");
+				//userDetailsFinal = new UserMock().getMockLoginCredentialsEntity();
+				throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
 			}
 
-		return userDetails;
+		return userDetailsFinal;
 	}
 	
 	public void saveUser(SignUpDto signUpUser) {
 		UserDao userDao = DaoFactory.userDaoInstance();
 		
-		UserEntity user = converter.signUpDtoToUserEntity(signUpUser);
-		UserDetailsEntity userDetails = converter.signUpDtoToUserDetailsEntity(signUpUser);
+		UserEntity user = EntityConverter.signUpDtoToUserEntity(signUpUser);
+		UserDetailsEntity userDetails = EntityConverter.signUpDtoToUserDetailsEntity(signUpUser);
 		
 		user.setUserDetails(userDetails);
 		userDetails.setUser(user);

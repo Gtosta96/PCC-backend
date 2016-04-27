@@ -22,7 +22,5 @@ public interface IGenericDao<T, PK> {
 	
 	public T findById(PK id) throws GenericExceptionEntity;
 	
-	public T findByUsernameOrEmail(String usernameOrEmail) throws GenericExceptionEntity;
-	
 	List<T> listAll() throws GenericExceptionEntity;
 }

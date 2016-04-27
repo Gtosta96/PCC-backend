@@ -7,9 +7,9 @@ import br.com.pcc.dto.UserDetailsDto;
 import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.entity.UserEntity;
 
-public class EntityConverter {
+public final class EntityConverter {
 
-	public UserDetailsEntity userDetailsDtoToUserDetailsEntity(UserDetailsDto dto) {
+	public static UserDetailsEntity userDetailsDtoToUserDetailsEntity(UserDetailsDto dto) {
 		
 		UserDetailsEntity entity = new UserDetailsEntity();
 		boolean isEmail = EmailValidator.getInstance().isValid(dto.getUsernameOrEmail());
@@ -25,7 +25,7 @@ public class EntityConverter {
 		return entity;
 	}
 	
-	public UserEntity signUpDtoToUserEntity(SignUpDto dto) {
+	public static UserEntity signUpDtoToUserEntity(SignUpDto dto) {
 		
 		UserEntity entity = new UserEntity();
 		entity.setFirstName(dto.getFirstName());
@@ -36,7 +36,7 @@ public class EntityConverter {
 		return entity;
 	}
 	
-	public UserDetailsEntity signUpDtoToUserDetailsEntity(SignUpDto dto) {
+	public static UserDetailsEntity signUpDtoToUserDetailsEntity(SignUpDto dto) {
 		
 		UserDetailsEntity entity = new UserDetailsEntity();
 		entity.setUsername(dto.getUsername());

@@ -12,9 +12,9 @@ import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 //@Repository
 public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 
-	private final EntityManager entityManager;
-	private final EntityManagerFactory factory;
-	private Class<T> persistentClass;
+	protected final EntityManager entityManager;
+	protected final EntityManagerFactory factory;
+	protected Class<T> persistentClass;
 
 	// CONSTRUTORES
 	public GenericDao() {
@@ -88,11 +88,6 @@ public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 	@Override
 	public T findById(PK id) throws GenericExceptionEntity {
 		return (T) this.entityManager.find(this.persistentClass, id);
-	}
-	
-	@Override
-	public T findByUsernameOrEmail(String usernameOrEmail) throws GenericExceptionEntity {
-		return (T) this.entityManager.find(this.persistentClass, usernameOrEmail);
 	}
 
 	@SuppressWarnings("unchecked")
