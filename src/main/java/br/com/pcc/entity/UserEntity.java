@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 /**
  * UsersCredentialsEntity será responsável por mapear a tabela USER_CREDENTIALS no
  * banco de dados e construir objetos com informações pessoais do Usuário.
@@ -52,6 +54,7 @@ public class UserEntity implements Serializable {
 	private String gender;
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonBackReference // Annotation para resolver problema: jackson-infinite-recursion
 	private UserDetailsEntity userDetails;
 
 	// CONSTRUTORES

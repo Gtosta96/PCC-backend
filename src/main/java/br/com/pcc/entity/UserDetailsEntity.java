@@ -18,8 +18,6 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 /**
  * LoginCredentialsEntity será responsável por mapear a tabela LOGIN_CREDENTIALS no banco de
  * dados e construir objetos com informações de login do Usuário.
@@ -62,10 +60,8 @@ public class UserDetailsEntity implements Serializable {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 	
-	//TODO: TESTAR! RECURSÃO INFINITA, TAMBÉM: @JsonManagedReference
 	@OneToOne(fetch = FetchType.LAZY) //	(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	@JsonBackReference // Annotation para resolver problema: jackson-infinite-recursion
 	private UserEntity user;
 	
 	@Transient

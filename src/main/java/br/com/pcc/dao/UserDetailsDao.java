@@ -10,11 +10,9 @@ public class UserDetailsDao extends GenericDao<UserDetailsEntity, Long> {
 	
 	public UserDetailsEntity findByUsernameOrEmail(String usernameOrEmail, String password) throws GenericExceptionEntity {
 		
-//		select * from user_details where (username || email) iLIKE ? and password = ?
-//		TypedQuery<UserDetailsEntity> query = (TypedQuery<UserDetailsEntity>) entityManager.createNativeQuery("select * from user_details where (username || email) iLIKE ?", UserDetailsEntity.class);
-		Query query = entityManager.createNativeQuery("select * from user_details where (username || email) iLIKE ?", UserDetailsEntity.class);
+		Query query = entityManager.createNativeQuery("select * from user_details where (username || email) iLIKE ? and password = ?", UserDetailsEntity.class);
 		query.setParameter(1, "%" + usernameOrEmail + "%");
-//		query.setParameter(2, password);
+		query.setParameter(2, password);
 		
 		return (UserDetailsEntity) query.getSingleResult();
 	}
