@@ -2,8 +2,6 @@ package br.com.pcc.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -20,35 +18,27 @@ public class SignUpDto implements Serializable {
 	private static final long serialVersionUID = 15032016140458L;
 
 	@NotEmpty
-	@Column(name = "FIRST_NAME")
 	private String firstName;
 
 	@NotEmpty
-	@Column(name = "LAST_NAME")
 	private String lastName;
 
 	@NotEmpty
 	@Email
-	@Column(name = "EMAIL")
 	private String email;
 	
 	@NotEmpty
-	@Column(name = "USERNAME")
 	private String username;
 
 	@NotEmpty
-	@Column(name = "PASSWORD")
 	private String password;
 	
-	@Column(name = "PASSWORD_HINT")
 	private String passwordHint;
 
 	@NotEmpty
-	@Column(name = "GENDER")
 	private String gender;
 	
 	@NotEmpty
-	@Column(name = "BORN_DATE")
 	private String bornDate;
 	
 	public SignUpDto() {}

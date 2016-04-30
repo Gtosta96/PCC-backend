@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.pcc.dto.SignUpDto;
 import br.com.pcc.dto.UserDetailsDto;
-import br.com.pcc.entity.UserDetailsEntity;
+import br.com.pcc.entity.UserEntity;
 import br.com.pcc.service.UserService;
 import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
@@ -24,19 +24,19 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
 	@ResponseBody
-	public UserDetailsEntity authLogin(@RequestBody @Valid UserDetailsDto user, HttpServletResponse response) {		
-		UserDetailsEntity loginCredentials = null;
+	public UserEntity authLogin(@RequestBody @Valid UserDetailsDto credentials, HttpServletResponse response) {		
+		UserEntity user = null;
 		try {
-			LOGGER.info("Tentativa de login, username/email: " + user.getUsernameOrEmail());
+			LOGGER.info("Tentativa de login, username/email: " + credentials.getUsernameOrEmail());
 			
-			loginCredentials = userService.getLoginCredentials(user);
-			LOGGER.info("Usuário logado com sucesso: " + loginCredentials.getUsernameOrEmail());
+			user = userService.findByLoginCredentials(credentials);
+			LOGGER.info("Usuário logado com sucesso: " + user.getUserDetails().getUsernameOrEmail());
 		} catch (GenericExceptionEntity e) {
 			LOGGER.error("Usuário não autorizado: " + e);
 			throw e;
 		}
 
-		return loginCredentials;
+		return user;
 	}
 	
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)

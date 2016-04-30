@@ -4,7 +4,6 @@ import org.apache.log4j.Logger;
 
 import br.com.pcc.converter.EntityConverter;
 import br.com.pcc.dao.UserDao;
-import br.com.pcc.dao.UserDetailsDao;
 import br.com.pcc.dao.util.DaoFactory;
 import br.com.pcc.dto.SignUpDto;
 import br.com.pcc.dto.UserDetailsDto;
@@ -18,23 +17,23 @@ public class UserService {
 
 	private static Logger LOGGER = Logger.getLogger(UserService.class);
 	 
-	public UserDetailsEntity getLoginCredentials(UserDetailsDto userDetailsDto) throws GenericExceptionEntity {
-		UserDetailsDao userDetailsDao = DaoFactory.userDetailsDaoInstance();
+	public UserEntity findByLoginCredentials(UserDetailsDto userDetailsDto) throws GenericExceptionEntity {
+		UserDao userDao = DaoFactory.userDaoInstance();
 		UserDetailsEntity userDetails = EntityConverter.userDetailsDtoToUserDetailsEntity(userDetailsDto);
 		
 		LOGGER.info("Tentativa de busca de Usuário.");
-		UserDetailsEntity userDetailsFinal = null;
-		userDetailsFinal = userDetailsDao.findByUsernameOrEmail(userDetails.getUsernameOrEmail(), userDetails.getPassword());
+		UserEntity user = null;
+		user = userDao.findUserByUsernameOrEmail(userDetails.getUsernameOrEmail(), userDetails.getPassword()); 
 		
-		if (userDetailsFinal != null) {
-			LOGGER.info("Usuário recuperado com sucesso: " + userDetailsFinal.getUsernameOrEmail());
+		if (user != null) {
+			LOGGER.info("Usuário recuperado com sucesso: " + user.getUserDetails().getUsername());
 		} else {
 				LOGGER.info("Usuário não encontrado, pegando dados do mock/lançando exception");
 				//userDetailsFinal = new UserMock().getMockLoginCredentialsEntity();
 				throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
 			}
 
-		return userDetailsFinal;
+		return user;
 	}
 	
 	public void saveUser(SignUpDto signUpUser) {
@@ -45,6 +44,7 @@ public class UserService {
 		
 		user.setUserDetails(userDetails);
 		userDetails.setUser(user);
+		userDetails.setEnabled(true);
 		
 		userDao.save(user);
 	}
