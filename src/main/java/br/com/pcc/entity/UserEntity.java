@@ -1,7 +1,7 @@
 package br.com.pcc.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -32,9 +33,9 @@ public class UserEntity implements Serializable {
 
 	// PARAMETROS
 	@Id
-	@Column(name = "USER_ID")
+	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
+	private Long id;
 
 	@NotEmpty
 	@Column(name = "FIRST_NAME")
@@ -52,10 +53,11 @@ public class UserEntity implements Serializable {
 	@Column(name = "GENDER")
 	private String gender;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserDetailsEntity userDetails;
 	
-	private ArrayList<TravelEntity> travelsList;
+	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<TravelEntity> travelsList;
 
 	// CONSTRUTORES
 	public UserEntity() {}
@@ -68,8 +70,8 @@ public class UserEntity implements Serializable {
 		this.gender = gender;
 	}
 
-	public Long getUserId() {
-		return userId;
+	public Long getId() {
+		return id;
 	}
 
 	public String getFirstName() {
@@ -112,11 +114,11 @@ public class UserEntity implements Serializable {
 		this.userDetails = userDetails;
 	}
 
-	public ArrayList<TravelEntity> getTravelsList() {
+	public List<TravelEntity> getTravelsList() {
 		return travelsList;
 	}
 
-	public void setTravelsList(ArrayList<TravelEntity> travelsList) {
+	public void setTravelsList(List<TravelEntity> travelsList) {
 		this.travelsList = travelsList;
 	}	
 }

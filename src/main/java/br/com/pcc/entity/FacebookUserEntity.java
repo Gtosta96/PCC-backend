@@ -1,18 +1,35 @@
 package br.com.pcc.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "FACEBOOK_USERS", catalog = "PCC")
 public class FacebookUserEntity implements Serializable {
 
 	private static final long serialVersionUID = 9052016210425L;
 	
+	@Id
+	@Column(name = "ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private ArrayList<TravelEntity> travelsList;
+	
+	@Column(name = "USER_ID")
+	private Long facebookId;
+	
+	
+	private List<TravelEntity> travelsList;
 
 	public FacebookUserEntity() {}
 
-	public FacebookUserEntity(ArrayList<TravelEntity> travelsList) {
+	public FacebookUserEntity(List<TravelEntity> travelsList) {
 		this.travelsList = travelsList;
 	}
 	
@@ -20,11 +37,11 @@ public class FacebookUserEntity implements Serializable {
 		return id;
 	}
 
-	public ArrayList<TravelEntity> getTravelsList() {
+	public List<TravelEntity> getTravelsList() {
 		return travelsList;
 	}
 
-	public void setTravelsList(ArrayList<TravelEntity> travelsList) {
+	public void setTravelsList(List<TravelEntity> travelsList) {
 		this.travelsList = travelsList;
 	}
 

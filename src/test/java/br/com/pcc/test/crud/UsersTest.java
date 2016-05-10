@@ -42,7 +42,7 @@ public class UsersTest {
 	@Test
 	public void testFindById() {		
 		try {
-			Long id = this.listAll().get(0).getUserId();
+			Long id = this.listAll().get(0).getId();
 			UserEntity userData = this.usersDao.findById(id);
 			LOGGER.info("Usuário Encontrado: " + userData);
 		} catch (Exception e) {

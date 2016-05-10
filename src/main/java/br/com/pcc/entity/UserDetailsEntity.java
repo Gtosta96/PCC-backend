@@ -4,11 +4,10 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -18,7 +17,7 @@ import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * LoginCredentialsEntity será responsável por mapear a tabela LOGIN_CREDENTIALS no banco de
@@ -39,8 +38,8 @@ public class UserDetailsEntity implements Serializable {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
 	@GeneratedValue(generator = "generator")
-	@Column(name = "LOGIN_ID")
-	private Long loginId;
+	@Column(name = "ID")
+	private Long id;
 
 	@NotEmpty
 	@Column(name = "USERNAME", unique = true)
@@ -62,9 +61,9 @@ public class UserDetailsEntity implements Serializable {
 	@Column(name = "ENABLED")
 	private Boolean enabled;
 	
-	@OneToOne(fetch = FetchType.LAZY) //	(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	@JsonBackReference // Annotation para resolver problema: jackson-infinite-recursion
+	@OneToOne
+	@JoinColumn(name = "ID")
+	@JsonIgnore
 	private UserEntity user;
 	
 	@Transient
@@ -81,8 +80,8 @@ public class UserDetailsEntity implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Long getLoginId() {
-		return loginId;
+	public Long getId() {
+		return id;
 	}
 
 	public String getUsername() {
