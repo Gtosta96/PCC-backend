@@ -15,6 +15,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class PhotosEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5102016072010L;
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
