@@ -43,7 +43,7 @@ public class UserDetailsEntity implements Serializable {
 	private Long loginId;
 
 	@NotEmpty
-	@Column(name = "USERNAME")
+	@Column(name = "USERNAME", unique = true)
 	private String username;
 
 	@NotEmpty
@@ -55,7 +55,7 @@ public class UserDetailsEntity implements Serializable {
 
 	@NotEmpty
 	@Email
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", unique = true)
 	private String email;
 
 	@NotNull

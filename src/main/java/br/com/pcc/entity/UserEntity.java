@@ -1,6 +1,7 @@
 package br.com.pcc.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -53,11 +54,14 @@ public class UserEntity implements Serializable {
 	
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	private UserDetailsEntity userDetails;
+	
+	private ArrayList<TravelEntity> travelsList;
 
 	// CONSTRUTORES
 	public UserEntity() {}
-
+	
 	public UserEntity(String firstName, String lastName, String bornDate, String gender) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.bornDate = bornDate;
@@ -104,13 +108,15 @@ public class UserEntity implements Serializable {
 		return userDetails;
 	}
 
-	public void setUserDetails(UserDetailsEntity loginCredentials) {
-		this.userDetails = loginCredentials;
+	public void setUserDetails(UserDetailsEntity userDetails) {
+		this.userDetails = userDetails;
 	}
 
-	@Override
-	public String toString() {
-		return "UserEntity [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", bornDate="
-				+ bornDate + ", gender=" + gender + ", userDetails=" + userDetails + "]";
+	public ArrayList<TravelEntity> getTravelsList() {
+		return travelsList;
+	}
+
+	public void setTravelsList(ArrayList<TravelEntity> travelsList) {
+		this.travelsList = travelsList;
 	}	
 }
