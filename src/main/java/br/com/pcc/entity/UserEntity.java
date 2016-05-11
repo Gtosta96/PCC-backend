@@ -56,8 +56,8 @@ public class UserEntity implements Serializable {
 	@OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserDetailsEntity userDetails;
 	
-	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<TravelEntity> travelsList;
+//	@OneToMany(mappedBy = "id", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List<TravelEntity> travelsList;
 
 	// CONSTRUTORES
 	public UserEntity() {}
@@ -114,11 +114,11 @@ public class UserEntity implements Serializable {
 		this.userDetails = userDetails;
 	}
 
-	public List<TravelEntity> getTravelsList() {
-		return travelsList;
-	}
-
-	public void setTravelsList(List<TravelEntity> travelsList) {
-		this.travelsList = travelsList;
-	}	
+//	public List<TravelEntity> getTravelsList() {
+//		return travelsList;
+//	}
+//
+//	public void setTravelsList(List<TravelEntity> travelsList) {
+//		this.travelsList = travelsList;
+//	}	
 }
