@@ -1,5 +1,6 @@
 package br.com.pcc.test.crud;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.util.DaoFactory;
+import br.com.pcc.entity.TravelEntity;
 import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.entity.UserEntity;
 
@@ -28,8 +30,18 @@ public class UsersTest {
 		UserEntity user = new UserEntity("Gabriel", "Tosta", "FIX it", "Masculino");
 		UserDetailsEntity userDetails = new UserDetailsEntity("Gtosta96", "Gtosta96", "Mesma coisa que o usuário", "gabrieltosta3@gmail.com", true);
 		
+		List<TravelEntity> travelsList = new ArrayList<TravelEntity>();
+		
+		for(int i = 0; i < 5; i++) {
+			TravelEntity travel = new TravelEntity("Mock" + i, "10/03/2016", "10/04/2016", 5d);
+			travel.setUser(user);
+			travelsList.add(travel);
+		}
+		
 		user.setUserDetails(userDetails);
 		userDetails.setUser(user);
+		
+		user.setTravelsList(travelsList);
 		
 		try {
 			usersDao.save(user);
@@ -42,7 +54,7 @@ public class UsersTest {
 	@Test
 	public void testFindById() {		
 		try {
-			Long id = this.listAll().get(0).getId();
+			Long id = this.listAll().get(0).getUserId();
 			UserEntity userData = this.usersDao.findById(id);
 			LOGGER.info("Usuário Encontrado: " + userData);
 		} catch (Exception e) {

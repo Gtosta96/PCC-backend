@@ -38,8 +38,8 @@ public class UserDetailsEntity implements Serializable {
 	@Id
 	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "user"))
 	@GeneratedValue(generator = "generator")
-	@Column(name = "ID")
-	private Long id;
+	@Column(name = "USER_DETAILS_ID")
+	private Long userDetailsId;
 
 	@NotEmpty
 	@Column(name = "USERNAME", unique = true)
@@ -62,7 +62,7 @@ public class UserDetailsEntity implements Serializable {
 	private Boolean enabled;
 	
 	@OneToOne
-	@JoinColumn(name = "ID")
+	@JoinColumn(name = "USER_ID")
 	@JsonIgnore
 	private UserEntity user;
 	
@@ -80,8 +80,8 @@ public class UserDetailsEntity implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserDetailsId() {
+		return userDetailsId;
 	}
 
 	public String getUsername() {
