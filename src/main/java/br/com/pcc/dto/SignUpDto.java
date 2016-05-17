@@ -1,6 +1,9 @@
 package br.com.pcc.dto;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -38,13 +41,13 @@ public class SignUpDto implements Serializable {
 	@NotEmpty
 	private String gender;
 	
-	@NotEmpty
-	private Long bornDate;
+	@NotNull
+	private Date bornDate;
 	
 	public SignUpDto() {}
 	
 	public SignUpDto(String firstName, String lastName, String email, String username, String password,
-			String passwordHint, String gender, Long bornDate) {
+			String passwordHint, String gender, Date bornDate) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -113,11 +116,11 @@ public class SignUpDto implements Serializable {
 		this.gender = gender;
 	}
 
-	public Long getBornDate() {
+	public Date getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(Long bornDate) {
+	public void setBornDate(Date bornDate) {
 		this.bornDate = bornDate;
 	}
 

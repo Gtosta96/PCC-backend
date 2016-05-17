@@ -16,4 +16,14 @@ public class ExceptionHandlingController {
 		response.setStatus(e.getHttpStatus());
 		return e;
 	 }
+	
+	//TODO: evoluir.
+	public void handleExceptionByCode(Integer code) {
+/*		ExceptionEnums exception;
+		
+		switch(code) {
+		case 01:
+			exception = ExceptionEnums.DAO_DELETE_ERROR;
+		}*/
+	}
 }
