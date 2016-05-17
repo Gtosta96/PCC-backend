@@ -39,12 +39,12 @@ public class SignUpDto implements Serializable {
 	private String gender;
 	
 	@NotEmpty
-	private String bornDate;
+	private Long bornDate;
 	
 	public SignUpDto() {}
 	
 	public SignUpDto(String firstName, String lastName, String email, String username, String password,
-			String passwordHint, String gender, String bornDate) {
+			String passwordHint, String gender, Long bornDate) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -113,11 +113,11 @@ public class SignUpDto implements Serializable {
 		this.gender = gender;
 	}
 
-	public String getBornDate() {
+	public Long getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(String bornDate) {
+	public void setBornDate(Long bornDate) {
 		this.bornDate = bornDate;
 	}
 

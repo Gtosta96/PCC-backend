@@ -1,6 +1,7 @@
 package br.com.pcc.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -45,9 +49,10 @@ public class UserEntity implements Serializable {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
-	@NotEmpty
+	@NotNull
 	@Column(name = "BORN_DATE")
-	private String bornDate;
+	@Temporal(TemporalType.DATE)
+	private Date bornDate;
 
 	@NotEmpty
 	@Column(name = "GENDER")
@@ -62,7 +67,7 @@ public class UserEntity implements Serializable {
 	// CONSTRUTORES
 	public UserEntity() {}
 	
-	public UserEntity(String firstName, String lastName, String bornDate, String gender) {
+	public UserEntity(String firstName, String lastName, Date bornDate, String gender) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -90,11 +95,11 @@ public class UserEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
-	public String getBornDate() {
+	public Date getBornDate() {
 		return bornDate;
 	}
 
-	public void setBornDate(String bornDate) {
+	public void setBornDate(Date bornDate) {
 		this.bornDate = bornDate;
 	}
 

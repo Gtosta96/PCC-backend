@@ -1,5 +1,7 @@
 package br.com.pcc.converter;
 
+import java.util.Date;
+
 import org.apache.commons.validator.routines.EmailValidator;
 
 import br.com.pcc.dto.SignUpDto;
@@ -30,7 +32,7 @@ public final class EntityConverter {
 		UserEntity entity = new UserEntity();
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
-		entity.setBornDate(dto.getBornDate());
+		entity.setBornDate(new Date(dto.getBornDate()));
 		entity.setGender(dto.getGender());
 		
 		return entity;

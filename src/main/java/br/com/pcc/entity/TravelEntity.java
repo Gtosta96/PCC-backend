@@ -1,6 +1,7 @@
 package br.com.pcc.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,11 +35,15 @@ public class TravelEntity implements Serializable {
 	@Column(name = "DESTINATION")
 	private String destination;
 	
+	@NotNull
+	@Temporal(TemporalType.DATE)
 	@Column(name = "START_DATE")
-	private String startDate;
+	private Date startDate;
 	
+	@NotNull
+	@Temporal(TemporalType.DATE)
 	@Column(name = "END_DATE")
-	private String endDate;
+	private Date endDate;
 	
 	@Column(name = "RANK")
 	private Double rank;
@@ -58,7 +66,7 @@ public class TravelEntity implements Serializable {
 
 	public TravelEntity() {}
 	
-	public TravelEntity(String destination, String startDate, String endDate, Double rank) {
+	public TravelEntity(String destination, Date startDate, Date endDate, Double rank) {
 		super();
 		this.destination = destination;
 		this.startDate = startDate;
@@ -78,19 +86,19 @@ public class TravelEntity implements Serializable {
 		this.destination = destination;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

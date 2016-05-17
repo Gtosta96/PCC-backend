@@ -1,6 +1,7 @@
 package br.com.pcc.test.crud;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +25,9 @@ public class UsersTest {
 	private UserDao usersDao;
 	private FacebookUserDao facebookUsersDao;
 	private static Logger LOGGER;
+	
+	static Date today = new Date();
+	static Date tomorrow = new Date(today.getTime() + (1000 * 60 * 60 * 24));
 
 	@Before
 	public void setUp() {
@@ -32,6 +36,7 @@ public class UsersTest {
 		LOGGER = Logger.getLogger(UsersTest.class);
 	}
 
+	
 	@Test
 	public void testSaveUser() {
 		
@@ -61,7 +66,7 @@ public class UsersTest {
 
 		int n = generateRandomNumber();
 		for (int i = 0; i < 5; i++) {
-			TravelEntity travel = new TravelEntity("Travel-" + i + "-" + n, "10/03/2016", "10/04/2016", 5d);
+			TravelEntity travel = new TravelEntity("Travel-" + i + "-" + n, today, tomorrow, 5d);
 			travel.setUser(user);
 			travelsList.add(travel);
 		}
@@ -87,7 +92,7 @@ public class UsersTest {
 
 		int n = generateRandomNumber();
 		for (int i = 0; i < 5; i++) {
-			TravelEntity travel = new TravelEntity("Travel-" + i + "-" + n, "10/03/2016", "10/04/2016", 5d);
+			TravelEntity travel = new TravelEntity("Travel-" + i + "-" + n, today, tomorrow, 5d);
 			travel.setFacebookUser(facebookUser);
 			travelsList.add(travel);
 		}
@@ -120,7 +125,7 @@ public class UsersTest {
 
 			userData.setFirstName("Gabriel2");
 			userData.setLastName("Tosta2");
-			userData.setBornDate("10/03/1996");
+			userData.setBornDate(tomorrow);
 
 			usersDao.update(userData);
 			LOGGER.info("Usuário Alterado: " + userData);
@@ -161,7 +166,7 @@ public class UsersTest {
 	public Object[] generateRandomUser() {
 		int n = generateRandomNumber();
 
-		UserEntity user = new UserEntity("name-" + n, "lastName-" + n, "10/10/2010", "Masculino");
+		UserEntity user = new UserEntity("name-" + n, "lastName-" + n, new Date(), "Masculino");
 		UserDetailsEntity userDetails = new UserDetailsEntity("myUser-" + n, "myUser-" + n, "",
 				"myUser-" + n + "@gmail.com", true);
 		Object array[] = { user, userDetails };

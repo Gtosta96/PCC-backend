@@ -1,5 +1,7 @@
 package br.com.pcc.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,8 +28,10 @@ public class CommentsEntity {
 	@Column(name = "COMMENT")
 	private String comment;
 
+	@NotNull
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DATE")
-	private String date;
+	private Date date;
 
 	@ManyToOne
 	@JoinColumn(name = "TRAVEL_ID")
@@ -33,7 +40,7 @@ public class CommentsEntity {
 
 	public CommentsEntity() {}
 	
-	public CommentsEntity(String comment, String date) {
+	public CommentsEntity(String comment, Date date) {
 		this.comment = comment;
 		this.date = date;
 	}
@@ -50,11 +57,11 @@ public class CommentsEntity {
 		this.comment = comment;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

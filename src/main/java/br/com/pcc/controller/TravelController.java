@@ -23,7 +23,7 @@ public class TravelController {
 	TravelService travelService = new TravelService();
 	private static Logger LOGGER = Logger.getLogger(UserController.class);
 
-	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
+	@RequestMapping(value = "/myTravels", method = RequestMethod.POST)
 	@ResponseBody
 	public List<TravelEntity> listTravelsFromTraveller(@RequestBody @Valid TravellerDto traveller,
 			HttpServletResponse response) {
