@@ -5,14 +5,14 @@ import java.io.Serializable;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
- * LoginCredentialsDto será responsável por transferir dados enviados pelo usuário para manipulações.
+ * LoginCredentialsDto será responsável por transferir dados no momento de login para manipulações.
  * 
  * @version 1.0.0
  * @since version 1.0.0
  * @author Gabriel Tosta
  */
 
-public class LoginCredentialsDto implements Serializable {
+public class UserDetailsDto implements Serializable {
 
 	private static final long serialVersionUID = 8032016125043L;
 	
@@ -26,9 +26,9 @@ public class LoginCredentialsDto implements Serializable {
 	private String password;
 
 	//CONSTRUTORES
-	public LoginCredentialsDto() {}
+	public UserDetailsDto() {}
 	
-	public LoginCredentialsDto(String email, String password) {
+	public UserDetailsDto(String email, String password) {
 		this.usernameOrEmail = email;
 		this.password = password;
 	}
@@ -69,7 +69,7 @@ public class LoginCredentialsDto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		LoginCredentialsDto other = (LoginCredentialsDto) obj;
+		UserDetailsDto other = (UserDetailsDto) obj;
 		if (password == null) {
 			if (other.password != null)
 				return false;
