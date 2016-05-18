@@ -87,7 +87,7 @@ public class UsersTest {
 	@Test
 	public void testSaveFacebookUserAndAddTravels() {
 
-		FacebookUserEntity facebookUser = new FacebookUserEntity();
+		FacebookUserEntity facebookUser = new FacebookUserEntity(230293023l, "facebook-name", "facebook-lastname", new Date(), "Masculino");
 		List<TravelEntity> travelsList = new ArrayList<TravelEntity>();
 
 		int n = generateRandomNumber();
@@ -96,7 +96,7 @@ public class UsersTest {
 			travel.setFacebookUser(facebookUser);
 			travelsList.add(travel);
 		}
-		facebookUser.setFacebookId(230293023l);
+
 		facebookUser.setTravelsList(travelsList);
 
 		try {
