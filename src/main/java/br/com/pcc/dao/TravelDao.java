@@ -13,7 +13,7 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 		return null;
 	}
 
-	public List<TravelEntity> findFacebookTravellerById(Long id) {
+	public List<TravelEntity> findByFacebookTravellerId(Long id) {
 		// TODO Auto-generated method stub
 		
 		return null;

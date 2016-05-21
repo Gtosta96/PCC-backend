@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "TRAVEL", catalog = "PCC")
+@Table(name = "TRAVELS", catalog = "PCC")
 public class TravelEntity implements Serializable {
 
 	private static final long serialVersionUID = 9052016210330L;

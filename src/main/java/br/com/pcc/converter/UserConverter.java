@@ -7,7 +7,7 @@ import br.com.pcc.dto.UserDetailsDto;
 import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.entity.UserEntity;
 
-public final class EntityConverter {
+public final class UserConverter {
 
 	public static UserDetailsEntity userDetailsDtoToUserDetailsEntity(UserDetailsDto dto) {
 		

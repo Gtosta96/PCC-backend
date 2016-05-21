@@ -2,7 +2,7 @@ package br.com.pcc.service;
 
 import org.apache.log4j.Logger;
 
-import br.com.pcc.converter.EntityConverter;
+import br.com.pcc.converter.UserConverter;
 import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.util.DaoFactory;
 import br.com.pcc.dto.SignUpDto;
@@ -16,10 +16,10 @@ import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 public class UserService {
 
 	private static Logger LOGGER = Logger.getLogger(UserService.class);
+	UserDao userDao = DaoFactory.userDaoInstance();
 	 
 	public UserEntity findByLoginCredentials(UserDetailsDto userDetailsDto) throws GenericExceptionEntity {
-		UserDao userDao = DaoFactory.userDaoInstance();
-		UserDetailsEntity userDetails = EntityConverter.userDetailsDtoToUserDetailsEntity(userDetailsDto);
+		UserDetailsEntity userDetails = UserConverter.userDetailsDtoToUserDetailsEntity(userDetailsDto);
 		
 		LOGGER.info("Tentativa de busca de Usuário.");
 		UserEntity user = null;
@@ -37,10 +37,9 @@ public class UserService {
 	}
 	
 	public void saveUser(SignUpDto signUpUser) {
-		UserDao userDao = DaoFactory.userDaoInstance();
 		
-		UserEntity user = EntityConverter.signUpDtoToUserEntity(signUpUser);
-		UserDetailsEntity userDetails = EntityConverter.signUpDtoToUserDetailsEntity(signUpUser);
+		UserEntity user = UserConverter.signUpDtoToUserEntity(signUpUser);
+		UserDetailsEntity userDetails = UserConverter.signUpDtoToUserDetailsEntity(signUpUser);
 		
 		user.setUserDetails(userDetails);
 		userDetails.setUser(user);

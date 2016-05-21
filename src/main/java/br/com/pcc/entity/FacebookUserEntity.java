@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "FACEBOOK_USER", catalog = "PCC")
+@Table(name = "FACEBOOK_USERS", catalog = "PCC")
 public class FacebookUserEntity implements Serializable {
 
 	private static final long serialVersionUID = 9052016210425L;

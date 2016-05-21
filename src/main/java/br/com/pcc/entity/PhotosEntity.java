@@ -20,7 +20,7 @@ public class PhotosEntity implements Serializable {
 	private static final long serialVersionUID = 5102016072010L;
 
 	@Id
-	@Column(name = "PHOTOS_ID")
+	@Column(name = "PHOTO_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long photosId;
 
