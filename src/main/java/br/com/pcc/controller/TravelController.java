@@ -2,11 +2,13 @@ package br.com.pcc.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,9 +26,9 @@ public class TravelController {
 	TravelService travelService = new TravelService();
 	private static Logger LOGGER = Logger.getLogger(UserController.class);
 
-	@RequestMapping(value = "/saveTravel", method = RequestMethod.POST)
+	@RequestMapping(value = "/saveTravel/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public void saveTravel(@RequestBody @Valid TravelDto travel, HttpServletResponse response) {
+	public void saveTravel(@RequestBody @PathVariable("id") Long id, @RequestBody @Valid TravelDto travel, HttpServletRequest request , HttpServletResponse response) {
 		try {
 			LOGGER.info("Tentativa de salvar viagem: " + travel.getDestination());
 

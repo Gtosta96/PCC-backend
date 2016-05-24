@@ -4,34 +4,50 @@ import java.util.Date;
 
 public class TravelDto {
 
-	private String[] comments;
-	private Date[] days;
 	private String destination;
-	private String[] photoResource;
+	private Date[] days;
+	private String[] comments;
+	private String[] resources;
 	
 	public TravelDto() {}
 
-	public TravelDto(String[] comments, Date[] days, String destination, String[] photoResource) {
+	public TravelDto(String destination, Date[] days, String[] comments, String[] resources) {
 		super();
-		this.comments = comments;
-		this.days = days;
 		this.destination = destination;
-		this.photoResource = photoResource;
-	}
-
-	public String[] getComments() {
-		return comments;
-	}
-
-	public Date[] getDays() {
-		return days;
+		this.days = days;
+		this.comments = comments;
+		this.resources = resources;
 	}
 
 	public String getDestination() {
 		return destination;
 	}
 
-	public String[] getPhotoResource() {
-		return photoResource;
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
+
+	public Date[] getDays() {
+		return days;
+	}
+
+	public void setDays(Date[] days) {
+		this.days = days;
+	}
+
+	public String[] getComments() {
+		return comments;
+	}
+
+	public void setComments(String[] comments) {
+		this.comments = comments;
+	}
+
+	public String[] getResources() {
+		return resources;
+	}
+
+	public void setResources(String[] resources) {
+		this.resources = resources;
+	}	
 }
