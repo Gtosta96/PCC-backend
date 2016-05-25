@@ -2,7 +2,6 @@ package br.com.pcc.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -28,11 +27,11 @@ public class TravelController {
 
 	@RequestMapping(value = "/saveTravel/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public void saveTravel(@RequestBody @PathVariable("id") Long id, @RequestBody @Valid TravelDto travel, HttpServletRequest request , HttpServletResponse response) {
+	public void saveTravel(@RequestBody @PathVariable("id") Long id, @RequestBody @Valid TravelDto travel, HttpServletResponse response) {
 		try {
 			LOGGER.info("Tentativa de salvar viagem: " + travel.getDestination());
 
-			travelService.saveTravel(travel);
+			travelService.saveTravel(id, travel);
 			LOGGER.info("Viagem salva com sucesso!");
 		} catch (GenericExceptionEntity e) {
 			LOGGER.error("Ocorreu um erro: " + e);
