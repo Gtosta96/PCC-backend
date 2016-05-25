@@ -1,6 +1,5 @@
 package br.com.pcc.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -12,9 +11,7 @@ import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.util.DaoFactory;
 import br.com.pcc.dto.TravelDto;
 import br.com.pcc.dto.TravellerDto;
-import br.com.pcc.entity.FacebookUserEntity;
 import br.com.pcc.entity.TravelEntity;
-import br.com.pcc.entity.UserEntity;
 
 //@Service
 public class TravelService {
@@ -29,17 +26,9 @@ public class TravelService {
 		TravelEntity travel = TravelConverter.travelDtoToTravelEntity(travelDto);
 
 		if(travelDto.getIsFacebookUser()) {
-			FacebookUserEntity user = facebookUserDao.findById(id); 
-			travel.setFacebookUser(user);
-			List<TravelEntity> travelList = new ArrayList<TravelEntity>();
-			travelList.add(travel);
-			user.setTravelsList(travelList);
+			travel.setFacebookUser(facebookUserDao.findById(id));
 		} else {
-			UserEntity user = userDao.findById(id);
-			travel.setUser(user);
-			List<TravelEntity> travelList = new ArrayList<TravelEntity>();
-			travelList.add(travel);
-			user.setTravelsList(travelList);
+			travel.setUser(userDao.findById(id));
 		}
 		
 		travelDao.save(travel);

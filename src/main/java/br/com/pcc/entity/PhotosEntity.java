@@ -31,7 +31,7 @@ public class PhotosEntity implements Serializable {
 	private boolean photoCover;
 
 	@ManyToOne
-	@JoinColumn(name = "USER_ID")
+	@JoinColumn(name = "TRAVEL_ID")
 	@JsonIgnore
 	private TravelEntity travel;
 
