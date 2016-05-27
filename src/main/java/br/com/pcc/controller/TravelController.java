@@ -2,7 +2,6 @@ package br.com.pcc.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -11,13 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.pcc.dto.TravelDto;
-import br.com.pcc.dto.TravellerDto;
 import br.com.pcc.entity.TravelEntity;
 import br.com.pcc.service.TravelService;
-import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
 @Controller
 public class TravelController {
@@ -27,34 +25,17 @@ public class TravelController {
 
 	@RequestMapping(value = "/saveTravel/{id}", method = RequestMethod.POST)
 	@ResponseBody
-	public void saveTravel(@RequestBody @PathVariable("id") Long id, @RequestBody @Valid TravelDto travel, HttpServletResponse response) {
-		try {
-			LOGGER.info("Tentativa de salvar viagem: " + travel.getDestination());
+	public void saveTravel(@RequestBody @PathVariable("id") Long id, @RequestBody @Valid TravelDto travel) {
+		LOGGER.info("Tentativa de salvar viagem: " + travel.getDestination());
 
-			travelService.saveTravel(id, travel);
-			LOGGER.info("Viagem salva com sucesso!");
-		} catch (GenericExceptionEntity e) {
-			LOGGER.error("Ocorreu um erro: " + e);
-			throw e;
-		}
+		travelService.saveTravel(id, travel);
+		LOGGER.info("Viagem salva com sucesso!");		
 	}
 
-	@RequestMapping(value = "/myTravels", method = RequestMethod.POST)
+	@RequestMapping(value = "/travelsList", method = RequestMethod.GET)
 	@ResponseBody
-	public List<TravelEntity> listTravelsFromTraveller(@RequestBody @Valid TravellerDto traveller,
-			HttpServletResponse response) {
+	public List<TravelEntity> listTravelsFromTraveller(@RequestParam(required = false) Long id, @RequestParam Integer page, @RequestParam Integer length) {
 
-		List<TravelEntity> travelsList = null;
-		try {
-			LOGGER.info("Tentativa de listar viagens do usuário: " + traveller.getId());
-
-			travelsList = travelService.findTravelsFromTraveller(traveller);
-			LOGGER.info("Lista de viagens recuperada com sucesso");
-		} catch (GenericExceptionEntity e) {
-			LOGGER.error("Ocorreu um erro: " + e);
-			throw e;
-		}
-
-		return travelsList;
+		return null;
 	}
 }
