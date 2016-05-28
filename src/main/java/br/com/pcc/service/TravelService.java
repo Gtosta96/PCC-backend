@@ -34,6 +34,14 @@ public class TravelService {
 		travelDao.save(travel);
 	}
 	
+	public List<TravelEntity> getTravelsInRange(Long id, Integer pag, Integer len) {
+		if (id != null) {
+			return travelDao.findByIdInRange(id, pag, len);
+		} else {
+			return travelDao.findInRange(pag, len);
+		}
+	}
+	
 	public List<TravelEntity> findTravelsFromTraveller(TravellerDto traveller) {
 
 		LOGGER.info("Tentativa de busca de viagens.");

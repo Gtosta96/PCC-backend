@@ -34,8 +34,8 @@ public class TravelController {
 
 	@RequestMapping(value = "/travelsList", method = RequestMethod.GET)
 	@ResponseBody
-	public List<TravelEntity> listTravelsFromTraveller(@RequestParam(required = false) Long id, @RequestParam Integer page, @RequestParam Integer length) {
-
-		return null;
+	public List<TravelEntity> listTravelsFromTraveller(@RequestParam(required = false) Long id, @RequestParam Integer pag, @RequestParam Integer len) {
+		LOGGER.info("Iniciado busca paginada");
+		return travelService.getTravelsInRange(id, pag, len);
 	}
 }
