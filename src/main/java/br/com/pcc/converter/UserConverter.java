@@ -33,6 +33,13 @@ public final class UserConverter {
 		entity.setBornDate(dto.getBornDate());
 		entity.setGender(dto.getGender());
 		
+		if(dto.getFacebookUser()) {
+			entity.setFacebookUser(dto.getFacebookUser());
+			entity.setFacebookUserId(dto.getFacebookUserId());
+		} else {
+			entity.setFacebookUser(false);
+		}
+		
 		return entity;
 	}
 	
@@ -43,6 +50,7 @@ public final class UserConverter {
 		entity.setPassword(dto.getPassword());
 		entity.setPasswordHint(dto.getPasswordHint());
 		entity.setEmail(dto.getEmail());
+		entity.setEnabled(dto.getEnabled());
 		
 		return entity;
 	}

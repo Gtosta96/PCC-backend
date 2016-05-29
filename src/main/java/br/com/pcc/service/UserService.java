@@ -43,7 +43,6 @@ public class UserService {
 		
 		user.setUserDetails(userDetails);
 		userDetails.setUser(user);
-		userDetails.setEnabled(true);
 		
 		userDao.save(user);
 	}

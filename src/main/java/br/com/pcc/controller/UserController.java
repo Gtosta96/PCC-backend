@@ -1,6 +1,5 @@
 package br.com.pcc.controller;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -24,7 +23,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/loginAuth", method = RequestMethod.POST)
 	@ResponseBody
-	public UserEntity authLogin(@RequestBody @Valid UserDetailsDto credentials, HttpServletResponse response) {		
+	public UserEntity authLogin(@RequestBody @Valid UserDetailsDto credentials) {		
 		UserEntity user = null;
 		try {
 			LOGGER.info("Tentativa de login, username/email: " + credentials.getUsernameOrEmail());
@@ -41,7 +40,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	@ResponseBody
-	public void signUp(@RequestBody @Valid SignUpDto user, HttpServletResponse response) {		
+	public void signUp(@RequestBody @Valid SignUpDto user) {		
 		try {
 			LOGGER.info("Tentativa de cadastro, email: " + user.getEmail());
 			

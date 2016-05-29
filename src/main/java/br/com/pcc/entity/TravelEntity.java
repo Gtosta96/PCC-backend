@@ -53,11 +53,6 @@ public class TravelEntity implements Serializable {
 	@JsonIgnore
 	private UserEntity user;
 	
-	@ManyToOne
-	@JoinColumn(name = "FACEBOOK_ID")
-	@JsonIgnore
-	private FacebookUserEntity facebookUser;
-	
 	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<CommentsEntity> comments;
 	
@@ -116,14 +111,6 @@ public class TravelEntity implements Serializable {
 
 	public void setUser(UserEntity user) {
 		this.user = user;
-	}
-
-	public FacebookUserEntity getFacebookUser() {
-		return facebookUser;
-	}
-
-	public void setFacebookUser(FacebookUserEntity facebookUser) {
-		this.facebookUser = facebookUser;
 	}
 
 	public List<CommentsEntity> getComments() {

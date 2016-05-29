@@ -9,10 +9,8 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.pcc.dao.FacebookUserDao;
 import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.util.DaoFactory;
-import br.com.pcc.entity.FacebookUserEntity;
 import br.com.pcc.entity.TravelEntity;
 import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.entity.UserEntity;
@@ -23,7 +21,6 @@ public class UsersTest {
 	private static final int USER_DETAILS = 1;
 	// @Autowired
 	private UserDao usersDao;
-	private FacebookUserDao facebookUsersDao;
 	private static Logger LOGGER;
 	
 	static Date today = new Date();
@@ -32,7 +29,6 @@ public class UsersTest {
 	@Before
 	public void setUp() {
 		usersDao = DaoFactory.userDaoInstance();
-		facebookUsersDao = DaoFactory.facebookUserDaoInstance();
 		LOGGER = Logger.getLogger(UsersTest.class);
 	}
 
@@ -79,29 +75,6 @@ public class UsersTest {
 		try {
 			usersDao.save(user);
 			LOGGER.info("Usuário Inserido: " + user);
-		} catch (Exception e) {
-			LOGGER.error("Usuário não inserido, ocorreu um erro!", e);
-		}
-	}
-	
-	@Test
-	public void testSaveFacebookUserAndAddTravels() {
-
-		FacebookUserEntity facebookUser = new FacebookUserEntity(230293023l, "facebook-name", "facebook-lastname", new Date(), "Masculino");
-		List<TravelEntity> travelsList = new ArrayList<TravelEntity>();
-
-		int n = generateRandomNumber();
-		for (int i = 0; i < 5; i++) {
-			TravelEntity travel = new TravelEntity("Travel-" + i + "-" + n, today, tomorrow, 5d);
-			travel.setFacebookUser(facebookUser);
-			travelsList.add(travel);
-		}
-
-		facebookUser.setTravelsList(travelsList);
-
-		try {
-			facebookUsersDao.save(facebookUser);
-			LOGGER.info("Usuário Inserido: " + facebookUser);
 		} catch (Exception e) {
 			LOGGER.error("Usuário não inserido, ocorreu um erro!", e);
 		}
@@ -166,7 +139,7 @@ public class UsersTest {
 	public Object[] generateRandomUser() {
 		int n = generateRandomNumber();
 
-		UserEntity user = new UserEntity("name-" + n, "lastName-" + n, new Date(), "Masculino");
+		UserEntity user = new UserEntity("name-" + n, "lastName-" + n, new Date(), "Masculino", false);
 		UserDetailsEntity userDetails = new UserDetailsEntity("myUser-" + n, "myUser-" + n, "",
 				"myUser-" + n + "@gmail.com", true);
 		Object array[] = { user, userDetails };

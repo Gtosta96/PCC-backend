@@ -1,16 +1,21 @@
 package br.com.pcc.dao.util;
 
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import br.com.pcc.util.enums.ExceptionEnums;
 import br.com.pcc.util.exception.entity.GenericExceptionEntity;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 //@Repository
-public class GenericDao<T, PK> implements IGenericDao<T, PK> {
+public class GenericDao<T, PK extends Serializable> implements IGenericDao<T, PK> {
 
 	protected final EntityManager entityManager;
 	protected final EntityManagerFactory factory;
@@ -94,5 +99,10 @@ public class GenericDao<T, PK> implements IGenericDao<T, PK> {
 	@Override
 	public List<T> listAll() throws GenericExceptionEntity {
 		return this.entityManager.createQuery(("FROM " + this.persistentClass.getName())).getResultList();			
+	}
+
+	@Override
+	public Page<T> findAll(Pageable pageable) {
+		throw new NotImplementedException();
 	}
 }

@@ -16,12 +16,6 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 		return null;
 	}
 
-	public List<TravelEntity> findByFacebookTravellerId(Long id) {
-		// TODO Auto-generated method stub
-
-		return null;
-	}
-
 	public List<TravelEntity> findInRange(Integer pag, Integer len) {
 		Query query = entityManager.createNativeQuery("select * from travels where travel_id >= ? and travel_id <= ?", TravelEntity.class);
 		query.setParameter(1, pag);

@@ -13,7 +13,7 @@ import br.com.pcc.entity.UserEntity;
 public class UserMock {
 
 	public UserDetailsEntity getMockLoginCredentialsEntity(){
-		UserEntity userData = new UserEntity("Gabriel", "Tosta", new Date(), "Masculino");
+		UserEntity userData = new UserEntity("Gabriel", "Tosta", new Date(), "Masculino", false);
 		UserDetailsEntity loginUserData = new UserDetailsEntity("Gtosta96", "Gtosta96", "Mesma coisa que o usuário", "gabrieltosta3@gmail.com", true);
 		
 		userData.setUserDetails(loginUserData);
