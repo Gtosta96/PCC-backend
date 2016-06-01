@@ -38,6 +38,11 @@ public class UserService {
 	
 	public void saveUser(SignUpDto signUpUser) {
 		
+		if(signUpUser.getFacebookUser()) {
+			if(userDao.findByFacebookUserId(signUpUser.getFacebookUserId())) {
+				return;
+			};
+		}
 		UserEntity user = UserConverter.signUpDtoToUserEntity(signUpUser);
 		UserDetailsEntity userDetails = UserConverter.signUpDtoToUserDetailsEntity(signUpUser);
 		

@@ -29,11 +29,10 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 	}
 
 	public List<TravelEntity> findByIdInRange(Long id, Integer pag, Integer len) {
-		Query query = entityManager.createNativeQuery("select * from travels where travel_id >= ? and travel_id <= ? and (user_id = ? or facebook_id = ?)", TravelEntity.class);
+		Query query = entityManager.createNativeQuery("select * from travels where travel_id >= ? and travel_id <= ? and user_id = ?", TravelEntity.class);
 		query.setParameter(1, pag);
 		query.setParameter(2, len);
 		query.setParameter(3, id);
-		query.setParameter(4, id);
 
 		List<TravelEntity> travels = new ArrayList<TravelEntity>();
 		for (Object travel : query.getResultList()) {

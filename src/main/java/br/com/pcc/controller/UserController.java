@@ -44,6 +44,7 @@ public class UserController {
 		try {
 			LOGGER.info("Tentativa de cadastro, email: " + user.getEmail());
 			
+			//TODO: VERIFICAR LÓGICA PARA NÃO MOSTRAR LOGGER "SUCESSO" QUANDO O USUÁRIO FOR DO FACEBOOK.
 			userService.saveUser(user);
 			LOGGER.info("Usuário cadastrado com sucesso: " + user.getEmail());
 		} catch (GenericExceptionEntity e) {

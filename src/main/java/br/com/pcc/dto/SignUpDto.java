@@ -6,7 +6,6 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * SignUpDto será responsável por transferir dados do usuário no momento do cadastro para manipulações.
@@ -20,20 +19,15 @@ public class SignUpDto implements Serializable {
 
 	private static final long serialVersionUID = 15032016140458L;
 
-	@NotEmpty
 	private String firstName;
 
-	@NotEmpty
 	private String lastName;
 
-	@NotEmpty
 	@Email
 	private String email;
 	
-	@NotEmpty
 	private String username;
 
-	@NotEmpty
 	private String password;
 	
 	private String passwordHint;
@@ -42,7 +36,6 @@ public class SignUpDto implements Serializable {
 	
 	private Date bornDate;
 	
-	@NotNull
 	private Boolean enabled;
 	
 	@NotNull
