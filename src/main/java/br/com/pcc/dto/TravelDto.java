@@ -8,16 +8,18 @@ public class TravelDto {
 	private Date[] days;
 	private String[] comments;
 	private String[] resources;
+	private Integer rank;
 	private Boolean isFacebookUser;
 	
 	public TravelDto() {}
 	
-	public TravelDto(String destination, Date[] days, String[] comments, String[] resources, Boolean isFacebookUser) {
+	public TravelDto(String destination, Date[] days, String[] comments, String[] resources, Integer rank, Boolean isFacebookUser) {
 		super();
 		this.destination = destination;
 		this.days = days;
 		this.comments = comments;
 		this.resources = resources;
+		this.rank = rank;
 		this.isFacebookUser = isFacebookUser;
 	}
 
@@ -51,6 +53,14 @@ public class TravelDto {
 
 	public void setResources(String[] resources) {
 		this.resources = resources;
+	}
+
+	public Integer getRank() {
+		return rank;
+	}
+
+	public void setRank(Integer rank) {
+		this.rank = rank;
 	}
 
 	public Boolean getIsFacebookUser() {

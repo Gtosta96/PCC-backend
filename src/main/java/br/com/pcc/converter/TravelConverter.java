@@ -27,8 +27,7 @@ public final class TravelConverter {
 		List<PhotosEntity> photos = convertArrayToPhotosEntity(entity, dto.getResources());
 		entity.setComments(comments);
 		entity.setPhotos(photos);
-		
-		entity.setRank(5d); //TODO: CORRIGIR PARA VIR DO FRONT-END RANK
+		entity.setRank(dto.getRank().doubleValue());
 		
 		return entity;
 	}
