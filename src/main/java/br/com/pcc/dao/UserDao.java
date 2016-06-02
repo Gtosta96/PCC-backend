@@ -20,17 +20,4 @@ public UserEntity findUserByUsernameOrEmail(String usernameOrEmail, String passw
 			throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
 		}
 	}
-
-	public Boolean findByFacebookUserId(Long facebookUserId) {
-
-		Query query = entityManager.createNativeQuery(
-				"select user.facebook_user_id from users where facebook_user_id = ?", UserEntity.class);
-		query.setParameter(1, facebookUserId);
-
-		if (query.getParameter("facebook_user_id") != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 }

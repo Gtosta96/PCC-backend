@@ -52,6 +52,20 @@ public final class UserConverter {
 		entity.setEmail(dto.getEmail());
 		entity.setEnabled(dto.getEnabled());
 		
+		if(entity.getUsername() == null && entity.getPassword() == null) {
+			entity.setFacebookUser(true);
+			entity.setEnabled(true);
+		}
+		
 		return entity;
+	}
+	
+public static UserDetailsEntity signUpDtoUpdateUserDetails(SignUpDto dto, UserDetailsEntity userDetails) {
+		
+		userDetails.setUsername(dto.getUsername());
+		userDetails.setPassword(dto.getPassword());
+		userDetails.setPasswordHint(dto.getPasswordHint());
+				
+		return userDetails;
 	}
 }
