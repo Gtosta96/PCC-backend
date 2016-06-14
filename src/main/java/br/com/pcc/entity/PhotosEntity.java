@@ -25,7 +25,7 @@ public class PhotosEntity implements Serializable {
 	private Long photosId;
 
 	@Column(name = "RESOURCE")
-	private String resource;
+	private byte[] resource;
 
 	@Column(name = "PHOTO_COVER")
 	private boolean photoCover;
@@ -37,7 +37,7 @@ public class PhotosEntity implements Serializable {
 
 	public PhotosEntity() {}
 	
-	public PhotosEntity(String resource, boolean photoCover) {
+	public PhotosEntity(byte[] resource, boolean photoCover) {
 		this.resource = resource;
 		this.photoCover = photoCover;
 	}
@@ -46,11 +46,11 @@ public class PhotosEntity implements Serializable {
 		return photosId;
 	}
 
-	public String getResource() {
+	public byte[] getResource() {
 		return resource;
 	}
 
-	public void setResource(String resource) {
+	public void setResource(byte[] resource) {
 		this.resource = resource;
 	}
 

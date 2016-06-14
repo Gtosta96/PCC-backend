@@ -1,5 +1,6 @@
 package br.com.pcc.converter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,8 +9,11 @@ import br.com.pcc.dto.TravelDto;
 import br.com.pcc.entity.CommentsEntity;
 import br.com.pcc.entity.PhotosEntity;
 import br.com.pcc.entity.TravelEntity;
+import sun.misc.BASE64Decoder;
 
 public final class TravelConverter {
+	
+	static BASE64Decoder decoder = new BASE64Decoder();
 
 	public static TravelEntity travelDtoToTravelEntity(TravelDto dto) {
 		
@@ -48,11 +52,14 @@ public final class TravelConverter {
 		
 		List<PhotosEntity> photosList = new ArrayList<PhotosEntity>();
 		PhotosEntity photo = null;
-		for (int i = 0; i < resources.length; i++) {
-			photosList.add(i, photo = new PhotosEntity(resources[i], false)); //TODO: VERIFICAR O QUE FAZER COM photoCover
-			photo.setTravel(travel);
-		}
-		
+			try {
+				for (int i = 0; i < resources.length; i++) {
+					photosList.add(i, photo = new PhotosEntity(decoder.decodeBuffer(resources[i]), false)); //TODO: Implementar photoCover
+					photo.setTravel(travel);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		return photosList;
 	}
 }

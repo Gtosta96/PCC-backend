@@ -22,7 +22,7 @@ public class TravelService {
 	public void saveTravel(Long id, TravelDto travelDto) {
 		
 		TravelEntity travel = TravelConverter.travelDtoToTravelEntity(travelDto);
-		travel.setUser(userDao.findById(id));
+		travel.setUser(userDao.findByIdOrFacebookId(id));
 		
 		travelDao.save(travel);
 	}

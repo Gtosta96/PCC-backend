@@ -26,7 +26,7 @@ public class TravelController {
 	@RequestMapping(value = "/saveTravel/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public void saveTravel(@RequestBody @PathVariable("id") Long id, @RequestBody @Valid TravelDto travel) {
-		LOGGER.info("Tentativa de salvar viagem: " + travel.getDestination());
+		LOGGER.info("Tentativa de salvar viagem:, UserID: " + id);
 
 		travelService.saveTravel(id, travel);
 		LOGGER.info("Viagem salva com sucesso!");		

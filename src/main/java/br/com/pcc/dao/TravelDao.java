@@ -17,7 +17,11 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 	}
 
 	public List<TravelEntity> findInRange(Integer pag, Integer len) {
-		Query query = entityManager.createNativeQuery("select * from travels where travel_id >= ? and travel_id <= ?", TravelEntity.class);
+		Query query = entityManager.createNativeQuery("SELECT * FROM travels t LEFT JOIN " +
+														"users u ON u.user_id = t.user_id LEFT JOIN " +
+														"photos p ON t.travel_id = p.travel_id LEFT JOIN " +
+														"comments c ON t.travel_id = c.travel_id " +
+														"WHERE t.travel_id >= ? AND t.travel_id <= ?", TravelEntity.class);
 		query.setParameter(1, pag);
 		query.setParameter(2, len);
 
@@ -29,7 +33,12 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 	}
 
 	public List<TravelEntity> findByIdInRange(Long id, Integer pag, Integer len) {
-		Query query = entityManager.createNativeQuery("select * from travels where travel_id >= ? and travel_id <= ? and user_id = ?", TravelEntity.class);
+		Query query = entityManager.createNativeQuery("SELECT * FROM travels t LEFT JOIN " +
+													 	"users u ON u.user_id = t.user_id LEFT JOIN " +
+													 	"photos p ON t.travel_id = p.travel_id LEFT JOIN " +
+													 	"comments c ON t.travel_id = c.travel_id " +
+													 	"WHERE t.travel_id >= ? AND t.travel_id <= ? " +
+													 	"AND u.user_id = ?", TravelEntity.class);
 		query.setParameter(1, pag);
 		query.setParameter(2, len);
 		query.setParameter(3, id);
