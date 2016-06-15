@@ -9,7 +9,6 @@ import br.com.pcc.dao.TravelDao;
 import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.util.DaoFactory;
 import br.com.pcc.dto.TravelDto;
-import br.com.pcc.dto.TravellerDto;
 import br.com.pcc.entity.TravelEntity;
 
 //@Service
@@ -27,28 +26,17 @@ public class TravelService {
 		travelDao.save(travel);
 	}
 	
-	public List<TravelEntity> getTravelsInRange(Long id, Integer pag, Integer len) {
+	public List<TravelEntity> getTravelsInRange(Long id, Integer limit, Integer offset) {
 		if (id != null) {
-			return travelDao.findByIdInRange(id, pag, len);
+			return travelDao.findByIdInRange(id, limit, offset);
 		} else {
-			return travelDao.findInRange(pag, len);
+			return travelDao.findInRange(limit, offset);
 		}
 	}
 	
-	public List<TravelEntity> findTravelsFromTraveller(TravellerDto traveller) {
-
-		LOGGER.info("Tentativa de busca de viagens.");
-		List<TravelEntity> travelsList = null;
-
-		travelsList = travelDao.findByTravellerId(traveller.getId());
-
-		if (travelsList != null) {
-			LOGGER.info("Viagens recuperadas com sucesso");
-		} else {
-			LOGGER.info("Viagens não encontrada, pegando dados do mock");
-			// UserMock().getMockLoginCredentialsEntity();
-		}
-
-		return travelsList;
+	public TravelEntity getTravelDetailsById(Long id) {
+		LOGGER.info("Tentativa de busca de viagem, id: " + id);
+		
+		return travelDao.findTravelDetailsById(id);
 	}
 }
