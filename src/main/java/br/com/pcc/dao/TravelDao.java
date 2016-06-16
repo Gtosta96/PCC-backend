@@ -35,14 +35,15 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 	}
 
 	public List<TravelEntity> findByIdInRange(Long id, Integer pag, Integer len) {
-		Query query = entityManager.createNativeQuery("SELECT * FROM travels t LEFT JOIN " +
-														"photos p ON t.travel_id = p.travel_id " +
-														"WHERE t.travel_id = ? " + 
-														"ORDER BY t.travel_id desc " +
+		Query query = entityManager.createNativeQuery("SELECT * FROM travels t LEFT JOIN " + 
+														"photos p ON t.travel_id = p.travel_id LEFT JOIN " +
+														"users u ON t.user_id = u.user_id WHERE " +
+														"(u.user_id = ? or u.facebook_user_id = ?) " + 
 														"limit ? offset ?", TravelEntity.class);
-		query.setParameter(3, id);
-		query.setParameter(1, pag);
-		query.setParameter(2, len);
+		query.setParameter(1, id);
+		query.setParameter(2, id);
+		query.setParameter(3, pag);
+		query.setParameter(4, len);
 
 		List<TravelEntity> travels = new ArrayList<TravelEntity>();
 		for (Object travel : query.getResultList()) {

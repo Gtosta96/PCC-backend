@@ -11,9 +11,10 @@ public class UserDao extends GenericDao<UserEntity, Long> {
 
 public UserEntity findUserByUsernameOrEmail(String usernameOrEmail, String password) {	
 	try {
-		Query query = entityManager.createNativeQuery("select u.* from users u, user_details ud where (ud.username || ud.email) iLIKE ? and password = ?", UserEntity.class);
+		Query query = entityManager.createNativeQuery("select * from users u INNER JOIN user_details ud ON u.user_id = ud.user_id where ud.username iLIKE ? or ud.email iLIKE ? and password = ?", UserEntity.class);
 		query.setParameter(1, "%" + usernameOrEmail + "%");
-		query.setParameter(2, password);
+		query.setParameter(2, "%" + usernameOrEmail + "%");
+		query.setParameter(3, password);
 		
 		return (UserEntity) query.getSingleResult();
 		} catch (Exception e) {
