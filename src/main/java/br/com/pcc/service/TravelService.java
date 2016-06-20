@@ -39,4 +39,9 @@ public class TravelService {
 		
 		return travelDao.findTravelDetailsById(id);
 	}
+
+	public void deleteTravel(Long id) {
+		travelDao.deleteById(id);
+		
+	}
 }

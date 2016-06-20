@@ -53,10 +53,10 @@ public class TravelEntity implements Serializable {
 	@JsonIgnore
 	private UserEntity user;
 	
-	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<CommentsEntity> comments;
 	
-	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<PhotosEntity> photos;
 
 	public TravelEntity() {}

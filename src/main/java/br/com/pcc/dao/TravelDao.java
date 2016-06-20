@@ -10,12 +10,6 @@ import br.com.pcc.entity.TravelEntity;
 
 public class TravelDao extends GenericDao<TravelEntity, Long> {
 
-	public List<TravelEntity> findByTravellerId(Long id) {
-		// TODO Auto-generated method stub
-
-		return null;
-	}
-
 	public List<TravelEntity> findInRange(Integer limit, Integer offset) {
 		Query query = entityManager.createNativeQuery("SELECT * FROM travels t LEFT JOIN " +
 														"photos p ON t.travel_id = p.travel_id " +
@@ -60,5 +54,12 @@ public class TravelDao extends GenericDao<TravelEntity, Long> {
 		query.setParameter(1, id);
 		
 		return (TravelEntity) query.getSingleResult();
+	}
+
+	public void deleteById(Long id) {
+		Query query = entityManager.createNativeQuery("DELETE FROM travels WHERE travel_id = ?");
+		query.setParameter(1, id);
+		
+		query.executeUpdate();
 	}
 }
