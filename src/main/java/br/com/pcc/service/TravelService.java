@@ -41,7 +41,7 @@ public class TravelService {
 	}
 
 	public void deleteTravel(Long id) {
-		travelDao.deleteById(id);
-		
+		TravelEntity travel = travelDao.findById(id);
+		travelDao.delete(travel);
 	}
 }

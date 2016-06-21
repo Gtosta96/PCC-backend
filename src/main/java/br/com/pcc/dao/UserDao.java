@@ -18,7 +18,10 @@ public UserEntity findUserByUsernameOrEmail(String usernameOrEmail, String passw
 		
 		return (UserEntity) query.getSingleResult();
 		} catch (Exception e) {
+			rollBack();
 			throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
+		} finally {
+			/*IMPLEMENTS*/
 		}
 	}
 
@@ -30,7 +33,10 @@ public UserEntity findByIdOrFacebookId(Long id) {
 		
 		return (UserEntity) query.getSingleResult();
 		} catch (Exception e) {
+			rollBack();
 			throw new GenericExceptionEntity(ExceptionEnums.INVALID_USER);
+		} finally {
+			/*IMPLEMENTS*/
 		}
 	}
 }

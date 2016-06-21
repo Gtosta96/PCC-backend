@@ -32,10 +32,10 @@ public class TravelController {
 		LOGGER.info("Viagem salva com sucesso!");		
 	}
 	
-	@RequestMapping(value = "/deleteTravel", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleteTravel", method = RequestMethod.GET)
 	@ResponseBody
-	public void deleteTravel(@RequestBody @PathVariable("id") Long id) {
-		LOGGER.info("Tentativa de salvar viagem:, UserID: " + id);
+	public void deleteTravel(@RequestBody @RequestParam Long id) {
+		LOGGER.info("Tentativa de deletar viagem:, ID: " + id);
 
 		travelService.deleteTravel(id);
 		LOGGER.info("Viagem deletada com sucesso!");		

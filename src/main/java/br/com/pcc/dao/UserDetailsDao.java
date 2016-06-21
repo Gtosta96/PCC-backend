@@ -5,6 +5,8 @@ import javax.persistence.Query;
 import br.com.pcc.dao.util.GenericDao;
 import br.com.pcc.dto.SignUpDto;
 import br.com.pcc.entity.UserDetailsEntity;
+import br.com.pcc.util.enums.ExceptionEnums;
+import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
 public class UserDetailsDao extends GenericDao<UserDetailsEntity, Long> {
 	
@@ -19,7 +21,9 @@ public class UserDetailsDao extends GenericDao<UserDetailsEntity, Long> {
 			return user != null ? true : false;
 		} catch(Exception e) {
 			return false;
-		}	
+		} finally {
+			/*IMPLEMENTS*/
+		}
 	}
 
 	public UserDetailsEntity findFacebookUserByEmail(SignUpDto signUpUser) {
@@ -30,7 +34,10 @@ public class UserDetailsDao extends GenericDao<UserDetailsEntity, Long> {
 			
 			return (UserDetailsEntity) query.getSingleResult();
 		} catch(Exception e) {
-			throw e;
-		}	
+			rollBack();
+			throw new GenericExceptionEntity(ExceptionEnums.DAO_GET_ERROR);
+		} finally {
+			/*IMPLEMENTS*/
+		}
 	}
 }
