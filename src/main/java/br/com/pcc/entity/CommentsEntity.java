@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class CommentsEntity {
 
 	@Id
-	@Column(name = "COMMENTS_ID")
+	@Column(name = "COMMENT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long commentsId;
 

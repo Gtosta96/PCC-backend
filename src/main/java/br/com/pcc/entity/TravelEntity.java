@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "TRAVEL", catalog = "PCC")
+@Table(name = "TRAVELS", catalog = "PCC")
 public class TravelEntity implements Serializable {
 
 	private static final long serialVersionUID = 9052016210330L;
@@ -53,15 +53,10 @@ public class TravelEntity implements Serializable {
 	@JsonIgnore
 	private UserEntity user;
 	
-	@ManyToOne
-	@JoinColumn(name = "FACEBOOK_ID")
-	@JsonIgnore
-	private FacebookUserEntity facebookUser;
-	
-	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<CommentsEntity> comments;
 	
-	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "travel", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval=true)
 	private List<PhotosEntity> photos;
 
 	public TravelEntity() {}
@@ -116,14 +111,6 @@ public class TravelEntity implements Serializable {
 
 	public void setUser(UserEntity user) {
 		this.user = user;
-	}
-
-	public FacebookUserEntity getFacebookUser() {
-		return facebookUser;
-	}
-
-	public void setFacebookUser(FacebookUserEntity facebookUser) {
-		this.facebookUser = facebookUser;
 	}
 
 	public List<CommentsEntity> getComments() {

@@ -17,12 +17,10 @@ public class UserDetailsDto implements Serializable {
 	private static final long serialVersionUID = 8032016125043L;
 	
 	//PARAMETROS
-    //@Size(min=5, max=16)
 	@NotEmpty
 	private String usernameOrEmail;
 	
     @NotEmpty
-	//@Size(min=6, max=18)
 	private String password;
 
 	//CONSTRUTORES

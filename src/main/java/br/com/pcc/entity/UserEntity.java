@@ -49,12 +49,10 @@ public class UserEntity implements Serializable {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 
-	@NotNull
 	@Column(name = "BORN_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date bornDate;
 
-	@NotEmpty
 	@Column(name = "GENDER")
 	private String gender;
 	
@@ -63,20 +61,40 @@ public class UserEntity implements Serializable {
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<TravelEntity> travelsList;
+	
+	@NotNull
+	@Column(name = "FACEBOOK_USER")
+	private Boolean facebookUser;
+	
+	@Column(name = "FACEBOOK_USER_ID")
+	private Long facebookUserId;
 
 	// CONSTRUTORES
 	public UserEntity() {}
 	
-	public UserEntity(String firstName, String lastName, Date bornDate, String gender) {
-		super();
+	public UserEntity(String firstName, String lastName, Date bornDate, String gender, Boolean facebookUser) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.bornDate = bornDate;
 		this.gender = gender;
+		this.facebookUser = facebookUser;
+	}
+
+	public UserEntity(String firstName, String lastName, Date bornDate, String gender, Boolean facebookUser, Long facebookUserId) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.bornDate = bornDate;
+		this.gender = gender;
+		this.facebookUser = facebookUser;
+		this.facebookUserId = facebookUserId;
 	}
 
 	public Long getUserId() {
 		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -125,5 +143,21 @@ public class UserEntity implements Serializable {
 
 	public void setTravelsList(List<TravelEntity> travelsList) {
 		this.travelsList = travelsList;
-	}	
+	}
+
+	public Boolean getFacebookUser() {
+		return facebookUser;
+	}
+
+	public void setFacebookUser(Boolean facebookUser) {
+		this.facebookUser = facebookUser;
+	}
+
+	public Long getFacebookUserId() {
+		return facebookUserId;
+	}
+
+	public void setFacebookUserId(Long facebookUserId) {
+		this.facebookUserId = facebookUserId;
+	}
 }
