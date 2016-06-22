@@ -27,7 +27,7 @@
 			<property name="dialect" value="org.hibernate.dialect.PostgreSQL9Dialect" />
 			<property name="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory" />
 			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.format_sql" value="true" />
 
 			<!-- Update Database and Generate Tables -->
 			<property name="hibernate.hbm2ddl.auto" value="update" />

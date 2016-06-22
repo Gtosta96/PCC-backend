@@ -3,7 +3,6 @@ package br.com.pcc.dao.util;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.pcc.dao.FacebookUserDao;
 import br.com.pcc.dao.TravelDao;
 import br.com.pcc.dao.UserDao;
 import br.com.pcc.dao.UserDetailsDao;
@@ -50,15 +49,6 @@ public class DaoFactory {
 		}
 
 		return userDetailsDaoInstance;
-	}
-	
-	private static FacebookUserDao facebookUserDaoInstance;
-	public static FacebookUserDao facebookUserDaoInstance() {
-		if (facebookUserDaoInstance == null) {
-			facebookUserDaoInstance = new FacebookUserDao();
-		}
-
-		return facebookUserDaoInstance;
 	}
 	
 	private static TravelDao travelDaoInstance;

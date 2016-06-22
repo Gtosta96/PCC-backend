@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -41,18 +40,15 @@ public class UserDetailsEntity implements Serializable {
 	@Column(name = "USER_DETAILS_ID")
 	private Long userDetailsId;
 
-	@NotEmpty
 	@Column(name = "USERNAME", unique = true)
 	private String username;
 
-	@NotEmpty
 	@Column(name = "PASSWORD")
 	private String password;
 
 	@Column(name = "PASSWORD_HINT")
 	private String passwordHint;
 
-	@NotEmpty
 	@Email
 	@Column(name = "EMAIL", unique = true)
 	private String email;
@@ -68,6 +64,9 @@ public class UserDetailsEntity implements Serializable {
 	
 	@Transient
 	private String usernameOrEmail;
+	
+	@Column(name = "FACEBOOK_USER")
+	private Boolean facebookUser;
 
 	// CONSTRUTORES
 	public UserDetailsEntity() {}
@@ -138,5 +137,13 @@ public class UserDetailsEntity implements Serializable {
 
 	public void setUsernameOrEmail(String usernameOrEmail) {
 		this.usernameOrEmail = usernameOrEmail;
+	}
+
+	public Boolean getFacebookUser() {
+		return facebookUser;
+	}
+
+	public void setFacebookUser(Boolean facebookUser) {
+		this.facebookUser = facebookUser;
 	}
 }

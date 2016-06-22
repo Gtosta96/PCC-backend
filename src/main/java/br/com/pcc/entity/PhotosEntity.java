@@ -20,24 +20,24 @@ public class PhotosEntity implements Serializable {
 	private static final long serialVersionUID = 5102016072010L;
 
 	@Id
-	@Column(name = "PHOTOS_ID")
+	@Column(name = "PHOTO_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long photosId;
 
 	@Column(name = "RESOURCE")
-	private String resource;
+	private byte[] resource;
 
 	@Column(name = "PHOTO_COVER")
 	private boolean photoCover;
 
 	@ManyToOne
-	@JoinColumn(name = "USER_ID")
+	@JoinColumn(name = "TRAVEL_ID")
 	@JsonIgnore
 	private TravelEntity travel;
 
 	public PhotosEntity() {}
 	
-	public PhotosEntity(String resource, boolean photoCover) {
+	public PhotosEntity(byte[] resource, boolean photoCover) {
 		this.resource = resource;
 		this.photoCover = photoCover;
 	}
@@ -46,11 +46,11 @@ public class PhotosEntity implements Serializable {
 		return photosId;
 	}
 
-	public String getResource() {
+	public byte[] getResource() {
 		return resource;
 	}
 
-	public void setResource(String resource) {
+	public void setResource(byte[] resource) {
 		this.resource = resource;
 	}
 

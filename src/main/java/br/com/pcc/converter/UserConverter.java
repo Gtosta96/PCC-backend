@@ -1,7 +1,5 @@
 package br.com.pcc.converter;
 
-import java.util.Date;
-
 import org.apache.commons.validator.routines.EmailValidator;
 
 import br.com.pcc.dto.SignUpDto;
@@ -9,7 +7,7 @@ import br.com.pcc.dto.UserDetailsDto;
 import br.com.pcc.entity.UserDetailsEntity;
 import br.com.pcc.entity.UserEntity;
 
-public final class EntityConverter {
+public final class UserConverter {
 
 	public static UserDetailsEntity userDetailsDtoToUserDetailsEntity(UserDetailsDto dto) {
 		
@@ -32,8 +30,15 @@ public final class EntityConverter {
 		UserEntity entity = new UserEntity();
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
-		entity.setBornDate(new Date(dto.getBornDate()));
+		entity.setBornDate(dto.getBornDate());
 		entity.setGender(dto.getGender());
+		
+		if(dto.getFacebookUser()) {
+			entity.setFacebookUser(dto.getFacebookUser());
+			entity.setFacebookUserId(dto.getFacebookUserId());
+		} else {
+			entity.setFacebookUser(false);
+		}
 		
 		return entity;
 	}
@@ -45,7 +50,22 @@ public final class EntityConverter {
 		entity.setPassword(dto.getPassword());
 		entity.setPasswordHint(dto.getPasswordHint());
 		entity.setEmail(dto.getEmail());
+		entity.setEnabled(dto.getEnabled());
+		
+		if(entity.getUsername() == null && entity.getPassword() == null) {
+			entity.setFacebookUser(true);
+			entity.setEnabled(true);
+		}
 		
 		return entity;
+	}
+	
+public static UserDetailsEntity signUpDtoUpdateUserDetails(SignUpDto dto, UserDetailsEntity userDetails) {
+		
+		userDetails.setUsername(dto.getUsername());
+		userDetails.setPassword(dto.getPassword());
+		userDetails.setPasswordHint(dto.getPasswordHint());
+				
+		return userDetails;
 	}
 }

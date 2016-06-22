@@ -1,10 +1,15 @@
 package br.com.pcc.dao.util;
 
+import java.io.Serializable;
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.Repository;
 
 import br.com.pcc.util.exception.entity.GenericExceptionEntity;
 
-public interface IGenericDao<T, PK> {
+public interface IGenericDao<T, PK extends Serializable> extends Repository<T, PK> {
 
 	public void beginTransaction();
 
@@ -22,5 +27,7 @@ public interface IGenericDao<T, PK> {
 	
 	public T findById(PK id) throws GenericExceptionEntity;
 	
-	List<T> listAll() throws GenericExceptionEntity;
+	public Page<T> findAll(Pageable pageable);
+	
+	public List<T> listAll() throws GenericExceptionEntity;
 }
